@@ -179,11 +179,17 @@ superseded.
 ## Auth
 
 Auth.js with the Prisma adapter. Providers: Credentials (email + bcrypt-hashed password),
-Google OAuth, Apple OAuth. `ageBand` is required at signup — collected directly on the
+Google OAuth, and Apple OAuth. `ageBand` is required at signup — collected directly on the
 credentials signup form, or as a mandatory one-time onboarding step immediately after first
 OAuth login (since Google/Apple don't supply it). Sessions via Auth.js JWT strategy (avoids
 extra DB round-trip per request; `Session` table still present for adapter compatibility and
 future revocation support).
+
+Apple Sign In requires an active Apple Developer Program account and extra setup (Services ID,
+private key) that isn't available yet. The Apple provider is implemented but gated behind an
+`AUTH_APPLE_ENABLED` env flag (default `false`): when disabled, the Apple provider is omitted
+from the Auth.js config and the "Continue with Apple" button is hidden from the sign-in UI, so
+enabling it later is a config change, not a code change.
 
 ## AI provider adapter
 
@@ -235,7 +241,8 @@ Run manually when authoring or updating tutorial content; never triggered by use
 
 ## Deliverable scope for this phase
 
-Working end-to-end: signup/login (credentials + Google + Apple) → age band selection → browse
+Working end-to-end: signup/login (credentials + Google, Apple stubbed behind a feature flag) →
+age band selection → browse
 2 seeded tutorials → read age-adapted steps with pre-generated images → chat with AI companion
 (session-scoped memory verified across multiple messages and across a simulated timeout) →
 mark steps complete and see it persist. Vitest + Playwright suites passing. README covering
