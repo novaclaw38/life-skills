@@ -40,9 +40,19 @@ export async function POST(request: Request) {
     ? await startNewSession(session.user.id, tutorialId)
     : await getOrCreateActiveSession(session.user.id, tutorialId, timeoutMinutes);
 
+  let provider;
+  try {
+    provider = getAIProvider();
+  } catch (err) {
+    console.error("AI provider configuration error:", err);
+    return NextResponse.json(
+      { error: "AI companion is unavailable right now. Please try again in a moment." },
+      { status: 502 }
+    );
+  }
+
   let reply: string;
   try {
-    const provider = getAIProvider();
     reply = await provider.sendMessage(activeSession.messages, message, {
       ageBand: session.user.ageBand as "AGE_8_11" | "AGE_12_15" | "AGE_16_18",
       tutorialTitle: tutorial.title,
