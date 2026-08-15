@@ -49,10 +49,19 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   pages: { signIn: "/signin" },
   providers,
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, user, trigger }) {
       if (user) {
         const dbUser = await prisma.user.findUnique({
           where: { id: user.id },
+          select: { ageBand: true },
+        });
+        token.ageBand = dbUser?.ageBand ?? null;
+      }
+      if (trigger === "update") {
+        // Re-read from the DB rather than trusting the client-supplied update
+        // payload, since ageBand gates content sensitivity.
+        const dbUser = await prisma.user.findUnique({
+          where: { id: token.sub! },
           select: { ageBand: true },
         });
         token.ageBand = dbUser?.ageBand ?? null;
@@ -61,7 +70,8 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     },
     async session({ session, token }) {
       if (session.user) {
-        session.user.ageBand = token.ageBand ?? null;
+        session.user.ageBand =
+          (token.ageBand as "AGE_8_11" | "AGE_12_15" | "AGE_16_18" | null) ?? null;
       }
       return session;
     },

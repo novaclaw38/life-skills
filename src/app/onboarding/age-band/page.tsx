@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 const AGE_BANDS = [
   { value: "AGE_8_11", label: "8–11" },
@@ -11,6 +12,7 @@ const AGE_BANDS = [
 
 export default function AgeBandOnboardingPage() {
   const router = useRouter();
+  const { update } = useSession();
   const [ageBand, setAgeBand] = useState<(typeof AGE_BANDS)[number]["value"]>("AGE_12_15");
   const [error, setError] = useState<string | null>(null);
 
@@ -28,6 +30,7 @@ export default function AgeBandOnboardingPage() {
       setError("Couldn't save that. Please try again.");
       return;
     }
+    await update();
     router.push("/tutorials");
   }
 
