@@ -17,7 +17,7 @@ test("signup -> age band -> view tutorial -> chat -> mark step complete", async 
   await page.getByPlaceholder("Ask a question…").fill("What tool do I need first?");
   await page.getByRole("button", { name: "Send" }).click();
 
-  await expect(page.locator("aside p").last()).not.toHaveText("", { timeout: 15_000 });
+  await expect(page.locator("aside p.bg-gray-100").first()).toBeVisible({ timeout: 15_000 });
 
   await page
     .getByRole("button", { name: "Mark complete" })
