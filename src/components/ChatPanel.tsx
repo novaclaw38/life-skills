@@ -23,6 +23,7 @@ export function ChatPanel({
   const [sending, setSending] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [pendingMessage, setPendingMessage] = useState<string | null>(null);
+  const [pendingIsStartNew, setPendingIsStartNew] = useState(false);
 
   async function send(startNew = false, retryMessage?: string) {
     const userMessage = retryMessage ?? input.trim();
@@ -35,6 +36,7 @@ export function ChatPanel({
       setInput("");
     }
     setPendingMessage(userMessage || "Let's start over.");
+    setPendingIsStartNew(startNew);
 
     const res = await fetch("/api/chat", {
       method: "POST",
@@ -51,6 +53,7 @@ export function ChatPanel({
     }
 
     setPendingMessage(null);
+    setPendingIsStartNew(false);
     const data = (await res.json()) as { reply: string };
     setMessages((prev) => [...prev, { role: "assistant", content: data.reply }]);
   }
@@ -81,7 +84,7 @@ export function ChatPanel({
           <button
             type="button"
             disabled={sending}
-            onClick={() => send(false, pendingMessage ?? undefined)}
+            onClick={() => send(pendingIsStartNew, pendingMessage ?? undefined)}
             className="underline disabled:opacity-50"
           >
             Retry
