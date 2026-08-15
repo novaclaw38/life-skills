@@ -57,8 +57,16 @@ export function TutorialSteps({
         {steps.map((step) => (
           <section
             key={step.id}
+            role="button"
+            tabIndex={0}
             className={`rounded border p-4 ${activeStepId === step.id ? "border-black" : ""}`}
             onClick={() => setActiveStepId(step.id)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                setActiveStepId(step.id);
+              }
+            }}
           >
             <div className="mb-2 flex items-center justify-between">
               <h2 className="font-medium">
@@ -70,6 +78,7 @@ export function TutorialSteps({
                   e.stopPropagation();
                   toggleComplete(step.id);
                 }}
+                onKeyDown={(e) => e.stopPropagation()}
                 className={`rounded px-2 py-1 text-xs ${
                   completed.has(step.id) ? "bg-green-100 text-green-800" : "border"
                 }`}

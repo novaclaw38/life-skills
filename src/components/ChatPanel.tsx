@@ -22,17 +22,19 @@ export function ChatPanel({
   const [input, setInput] = useState("");
   const [sending, setSending] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [pendingMessage, setPendingMessage] = useState<string | null>(null);
 
-  async function send(startNew = false) {
-    if (!input.trim() && !startNew) return;
-    const userMessage = input.trim();
+  async function send(startNew = false, retryMessage?: string) {
+    const userMessage = retryMessage ?? input.trim();
+    if (!userMessage && !startNew) return;
     setSending(true);
     setError(null);
 
-    if (userMessage) {
+    if (userMessage && !retryMessage) {
       setMessages((prev) => [...prev, { role: "user", content: userMessage }]);
       setInput("");
     }
+    setPendingMessage(userMessage || "Let's start over.");
 
     const res = await fetch("/api/chat", {
       method: "POST",
@@ -48,6 +50,7 @@ export function ChatPanel({
       return;
     }
 
+    setPendingMessage(null);
     const data = (await res.json()) as { reply: string };
     setMessages((prev) => [...prev, { role: "assistant", content: data.reply }]);
   }
@@ -75,7 +78,12 @@ export function ChatPanel({
       {error && (
         <div className="flex items-center justify-between rounded bg-red-50 p-2 text-xs text-red-700">
           <span>{error}</span>
-          <button type="button" onClick={() => send()} className="underline">
+          <button
+            type="button"
+            disabled={sending}
+            onClick={() => send(false, pendingMessage ?? undefined)}
+            className="underline disabled:opacity-50"
+          >
             Retry
           </button>
         </div>
@@ -84,7 +92,7 @@ export function ChatPanel({
         <input
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          onKeyDown={(e) => e.key === "Enter" && send()}
+          onKeyDown={(e) => e.key === "Enter" && !sending && send()}
           placeholder="Ask a question…"
           className="flex-1 rounded border px-2 py-1 text-sm"
         />
@@ -99,8 +107,9 @@ export function ChatPanel({
       </div>
       <button
         type="button"
+        disabled={sending}
         onClick={() => send(true)}
-        className="self-start text-xs text-gray-500 underline"
+        className="self-start text-xs text-gray-500 underline disabled:opacity-50"
       >
         Start a new conversation
       </button>
