@@ -11,7 +11,9 @@ const mockCount = vi.fn();
 
 describe("markStepComplete", () => {
   beforeEach(() => {
-    vi.mocked(prisma).userProgress = { upsert: mockUpsert } as any;
+    vi.mocked(prisma).userProgress = {
+      upsert: mockUpsert,
+    } as unknown as typeof prisma.userProgress;
     mockUpsert.mockReset();
   });
 
@@ -29,8 +31,12 @@ describe("markStepComplete", () => {
 
 describe("getTutorialProgress", () => {
   beforeEach(() => {
-    vi.mocked(prisma).userProgress = { findMany: mockFindMany } as any;
-    vi.mocked(prisma).tutorialStep = { count: mockCount } as any;
+    vi.mocked(prisma).userProgress = {
+      findMany: mockFindMany,
+    } as unknown as typeof prisma.userProgress;
+    vi.mocked(prisma).tutorialStep = {
+      count: mockCount,
+    } as unknown as typeof prisma.tutorialStep;
     mockFindMany.mockReset();
     mockCount.mockReset();
   });

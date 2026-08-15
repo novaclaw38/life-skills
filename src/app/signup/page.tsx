@@ -10,6 +10,8 @@ const AGE_BANDS = [
   { value: "AGE_16_18", label: "16–18" },
 ] as const;
 
+const appleSignInEnabled = process.env.NEXT_PUBLIC_AUTH_APPLE_ENABLED === "true";
+
 export default function SignupPage() {
   const router = useRouter();
   const [email, setEmail] = useState("");
@@ -89,6 +91,15 @@ export default function SignupPage() {
       >
         Continue with Google
       </button>
+      {appleSignInEnabled && (
+        <button
+          type="button"
+          onClick={() => signIn("apple", { callbackUrl: "/onboarding/age-band" })}
+          className="rounded border px-3 py-2"
+        >
+          Continue with Apple
+        </button>
+      )}
     </main>
   );
 }

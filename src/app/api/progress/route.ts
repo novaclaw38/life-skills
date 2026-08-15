@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { auth } from "@/lib/auth";
+import { prisma } from "@/lib/prisma";
 import { markStepComplete } from "@/lib/progress";
 
 const bodySchema = z.object({
@@ -20,6 +21,13 @@ export async function POST(request: Request) {
   }
 
   try {
+    const step = await prisma.tutorialStep.findFirst({
+      where: { id: parsed.data.stepId, tutorialId: parsed.data.tutorialId },
+    });
+    if (!step) {
+      return NextResponse.json({ error: "That step couldn't be found." }, { status: 400 });
+    }
+
     await markStepComplete(session.user.id, parsed.data.tutorialId, parsed.data.stepId);
   } catch {
     return NextResponse.json(

@@ -25,20 +25,26 @@ export async function POST(request: Request) {
 
   const { tutorialId, stepId, message, startNew } = parsed.data;
 
-  const [tutorial, step] = await Promise.all([
-    prisma.tutorial.findUnique({ where: { id: tutorialId } }),
-    prisma.tutorialStep.findUnique({ where: { id: stepId } }),
-  ]);
+  let tutorial, step, activeSession;
+  try {
+    [tutorial, step] = await Promise.all([
+      prisma.tutorial.findUnique({ where: { id: tutorialId } }),
+      prisma.tutorialStep.findUnique({ where: { id: stepId } }),
+    ]);
 
-  if (!tutorial || !step) {
-    return NextResponse.json({ error: "That tutorial step couldn't be found." }, { status: 404 });
+    if (!tutorial || !step) {
+      return NextResponse.json({ error: "That tutorial step couldn't be found." }, { status: 404 });
+    }
+
+    const timeoutMinutes = Number(process.env.AI_SESSION_TIMEOUT_MINUTES ?? "120");
+
+    activeSession = startNew
+      ? await startNewSession(session.user.id, tutorialId)
+      : await getOrCreateActiveSession(session.user.id, tutorialId, timeoutMinutes);
+  } catch (err) {
+    console.error("Database error while preparing chat session:", err);
+    return NextResponse.json({ error: "Something went wrong. Please try again." }, { status: 500 });
   }
-
-  const timeoutMinutes = Number(process.env.AI_SESSION_TIMEOUT_MINUTES ?? "120");
-
-  const activeSession = startNew
-    ? await startNewSession(session.user.id, tutorialId)
-    : await getOrCreateActiveSession(session.user.id, tutorialId, timeoutMinutes);
 
   let provider;
   try {
@@ -64,12 +70,18 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: friendlyMessage }, { status: 502 });
   }
 
-  await prisma.conversationMessage.createMany({
-    data: [
-      { sessionId: activeSession.id, role: "USER", content: message },
-      { sessionId: activeSession.id, role: "ASSISTANT", content: reply },
-    ],
-  });
+  try {
+    const now = new Date();
+    await prisma.conversationMessage.createMany({
+      data: [
+        { sessionId: activeSession.id, role: "USER", content: message, createdAt: now },
+        { sessionId: activeSession.id, role: "ASSISTANT", content: reply, createdAt: new Date(now.getTime() + 1) },
+      ],
+    });
+  } catch (err) {
+    console.error("Database error while saving chat messages:", err);
+    return NextResponse.json({ error: "Something went wrong. Please try again." }, { status: 500 });
+  }
 
   return NextResponse.json({ sessionId: activeSession.id, reply });
 }

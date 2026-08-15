@@ -18,10 +18,15 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Please choose an age range." }, { status: 400 });
   }
 
-  await prisma.user.update({
-    where: { id: session.user.id },
-    data: { ageBand: parsed.data.ageBand },
-  });
+  try {
+    await prisma.user.update({
+      where: { id: session.user.id },
+      data: { ageBand: parsed.data.ageBand },
+    });
+  } catch (err) {
+    console.error("Database error while updating age band:", err);
+    return NextResponse.json({ error: "Something went wrong. Please try again." }, { status: 500 });
+  }
 
   return NextResponse.json({ ok: true });
 }

@@ -4,6 +4,8 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 
+const appleSignInEnabled = process.env.NEXT_PUBLIC_AUTH_APPLE_ENABLED === "true";
+
 export default function SigninPage() {
   const router = useRouter();
   const [email, setEmail] = useState("");
@@ -62,6 +64,15 @@ export default function SigninPage() {
       >
         Continue with Google
       </button>
+      {appleSignInEnabled && (
+        <button
+          type="button"
+          onClick={() => signIn("apple", { callbackUrl: "/onboarding/age-band" })}
+          className="rounded border px-3 py-2"
+        >
+          Continue with Apple
+        </button>
+      )}
     </main>
   );
 }

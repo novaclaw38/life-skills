@@ -35,27 +35,34 @@ export function ChatPanel({
       setMessages((prev) => [...prev, { role: "user", content: userMessage }]);
       setInput("");
     }
+    if (startNew && !retryMessage) {
+      setMessages([]);
+    }
     setPendingMessage(userMessage || "Let's start over.");
     setPendingIsStartNew(startNew);
 
-    const res = await fetch("/api/chat", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ tutorialId, stepId, message: userMessage || "Let's start over.", startNew }),
-    });
+    try {
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ tutorialId, stepId, message: userMessage || "Let's start over.", startNew }),
+      });
 
-    setSending(false);
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({ error: "The AI companion couldn't reply." }));
+        setError(data.error ?? "The AI companion couldn't reply. Please try again.");
+        return;
+      }
 
-    if (!res.ok) {
-      const data = await res.json().catch(() => ({ error: "The AI companion couldn't reply." }));
-      setError(data.error ?? "The AI companion couldn't reply. Please try again.");
-      return;
+      setPendingMessage(null);
+      setPendingIsStartNew(false);
+      const data = (await res.json()) as { reply: string };
+      setMessages((prev) => [...prev, { role: "assistant", content: data.reply }]);
+    } catch {
+      setError("The AI companion couldn't reply. Please check your connection and try again.");
+    } finally {
+      setSending(false);
     }
-
-    setPendingMessage(null);
-    setPendingIsStartNew(false);
-    const data = (await res.json()) as { reply: string };
-    setMessages((prev) => [...prev, { role: "assistant", content: data.reply }]);
   }
 
   return (
