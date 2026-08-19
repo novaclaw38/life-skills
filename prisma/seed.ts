@@ -548,7 +548,7 @@ async function main() {
       title: "Checking and Topping Up Engine Oil",
       summary: "Check your car's oil level with the dipstick and top it up safely if it's low.",
       category: "Vehicle Maintenance",
-      safetyLevel: "low",
+      safetyLevel: "requires-adult-supervision",
       published: true,
       steps: {
         create: [
