@@ -967,6 +967,189 @@ async function main() {
     },
   });
 
+  const rice = await prisma.tutorial.upsert({
+    where: { slug: "cooking-rice-perfectly" },
+    update: {},
+    create: {
+      slug: "cooking-rice-perfectly",
+      title: "Cooking Rice Perfectly",
+      summary: "Cook fluffy, non-sticky rice on the hob every time using the absorption method.",
+      category: "Kitchen Skills",
+      safetyLevel: "requires-adult-supervision",
+      published: true,
+      steps: {
+        create: [
+          {
+            order: 1,
+            title: "Rinse the rice",
+            contentSimple:
+              "Put the rice in a sieve and rinse it under cold water until the water runs clear.",
+            contentStandard:
+              "Rinse the rice in a sieve under cold running water, swishing it with your hand until the water runs mostly clear — this removes excess starch that causes stickiness.",
+            contentDetailed:
+              "Place rice in a fine sieve and rinse under cold running water, agitating gently with your fingers, until the runoff water is mostly clear rather than cloudy. This washes off surface starch and reduces clumping during cooking.",
+            safetyWarning: null,
+          },
+          {
+            order: 2,
+            title: "Measure water and rice",
+            contentSimple:
+              "Use about 1.5 cups of water for every cup of rice, unless the packet says otherwise.",
+            contentStandard:
+              "Use a ratio of roughly 1.5 parts water to 1 part rice for white rice, adjusting to the packet instructions if given, and add a pinch of salt.",
+            contentDetailed:
+              "For white long-grain rice, use approximately 1.5 parts water to 1 part rice by volume, following packet guidance if it differs (basmati and jasmine often use closer to 1:1.5, brown rice needs more water and time). Add a small pinch of salt to the pot.",
+            safetyWarning: null,
+          },
+          {
+            order: 3,
+            title: "Bring to the boil, then simmer covered",
+            contentSimple:
+              "Bring it to a boil, then turn it right down, put the lid on, and don't lift the lid while it cooks.",
+            contentStandard:
+              "Bring the pot to a boil uncovered, then reduce to the lowest simmer, cover with a tight lid, and avoid lifting the lid — this traps steam that finishes cooking the rice evenly.",
+            contentDetailed:
+              "Bring to a rolling boil uncovered, then immediately reduce heat to the lowest simmer setting and cover tightly with a lid. Resist lifting the lid during cooking, as escaping steam changes the water ratio and can leave rice undercooked or unevenly cooked.",
+            safetyWarning: "Use oven gloves or a folded cloth if you need to move a hot pot — handles get hot too.",
+          },
+          {
+            order: 4,
+            title: "Rest, then fluff",
+            contentSimple:
+              "Take it off the heat, leave the lid on for 5-10 minutes, then fluff with a fork.",
+            contentStandard:
+              "Once the water is absorbed (usually 15-18 minutes for white rice), remove from heat and let it rest, covered, for 5-10 minutes before fluffing gently with a fork.",
+            contentDetailed:
+              "Once water is fully absorbed — check by tilting the pot or looking for steam holes on the surface — remove from heat and let the covered pot rest undisturbed for 5-10 minutes. This lets residual steam finish the grains. Fluff gently with a fork rather than stirring, to avoid mashing the rice.",
+            safetyWarning: null,
+          },
+        ],
+      },
+    },
+  });
+
+  const knifeSkills = await prisma.tutorial.upsert({
+    where: { slug: "basic-knife-skills" },
+    update: {},
+    create: {
+      slug: "basic-knife-skills",
+      title: "Basic Knife Skills and Safety",
+      summary: "Hold, grip, and cut safely with a kitchen knife using the claw grip.",
+      category: "Kitchen Skills",
+      safetyLevel: "requires-adult-supervision",
+      published: true,
+      steps: {
+        create: [
+          {
+            order: 1,
+            title: "Choose the right knife and stabilise your board",
+            contentSimple:
+              "Use a sharp knife sized for the job, and put a damp cloth under your chopping board so it doesn't slide.",
+            contentStandard:
+              "Pick a knife with a sharp, appropriately sized blade for the ingredient, and stabilise your chopping board by placing a damp cloth or non-slip mat underneath.",
+            contentDetailed:
+              "Select a knife matched to the task — a small paring knife for detail work, a larger chef's knife for most chopping. A sharp knife is safer than a dull one because it requires less force and is less likely to slip. Stabilise the board with a damp cloth or non-slip mat underneath.",
+            safetyWarning: "A sharp knife is safer than a blunt one — blunt blades slip more easily.",
+          },
+          {
+            order: 2,
+            title: "Grip the knife correctly",
+            contentSimple:
+              "Hold the handle firmly with your fingers wrapped around it, not gripping the blade.",
+            contentStandard:
+              "Grip the handle firmly with all fingers, keeping your index finger and thumb pinched slightly onto the blade's base for control, rather than wrapping around the sharp edge.",
+            contentDetailed:
+              "Use a firm handle grip with your index finger and thumb pinching the blade just above the handle (the \"pinch grip\") for better control and balance, keeping the rest of your fingers curled around the handle, well clear of the cutting edge.",
+            safetyWarning: null,
+          },
+          {
+            order: 3,
+            title: "Use the claw grip on your guide hand",
+            contentSimple:
+              "Curl the fingers of your other hand inward like a claw, so your knuckles guide the blade, not your fingertips.",
+            contentStandard:
+              "Curl the fingers of your non-knife hand inward into a claw shape, using your knuckles as a guide for the blade while keeping fingertips tucked well away from the edge.",
+            contentDetailed:
+              "Form a claw shape with your guide hand — fingertips curled under and back, knuckles forward — so the flat of the knife blade rests against your knuckles as a guide. This keeps fingertips protected far from the cutting edge throughout the cut.",
+            safetyWarning: "Always keep fingertips tucked in and away from the blade — the claw grip is what protects them.",
+          },
+          {
+            order: 4,
+            title: "Cut with a rocking or slicing motion",
+            contentSimple:
+              "Move the knife forward and down in one smooth motion, moving your guide hand back as you go.",
+            contentStandard:
+              "Use a smooth rocking or forward-slicing motion rather than sawing straight down, moving your claw-grip hand backward incrementally as you cut through the ingredient.",
+            contentDetailed:
+              "Cut using a smooth rocking motion (tip staying near the board, heel lifting and falling) or a forward slicing motion for larger items, rather than chopping straight down. Move your guide hand backward in small increments after each cut, always keeping your knuckles ahead of your fingertips relative to the blade.",
+            safetyWarning: "Never leave a knife submerged in a sink of water where it can't be seen — always wash it separately.",
+          },
+        ],
+      },
+    },
+  });
+
+  const pastaSauce = await prisma.tutorial.upsert({
+    where: { slug: "making-a-simple-pasta-sauce" },
+    update: {},
+    create: {
+      slug: "making-a-simple-pasta-sauce",
+      title: "Making a Simple Pasta Sauce",
+      summary: "Cook a basic tomato pasta sauce from tinned tomatoes, garlic, and herbs.",
+      category: "Kitchen Skills",
+      safetyLevel: "requires-adult-supervision",
+      published: true,
+      steps: {
+        create: [
+          {
+            order: 1,
+            title: "Prep your ingredients",
+            contentSimple:
+              "Chop an onion and garlic finely, and open a tin of chopped tomatoes.",
+            contentStandard:
+              "Finely chop one onion and 2 cloves of garlic, and open a 400g tin of chopped tomatoes ready to add.",
+            contentDetailed:
+              "Finely dice one onion and mince 2 cloves of garlic. Open a 400g tin of chopped tomatoes. Having everything prepped before you start cooking (\"mise en place\") makes the next steps much less stressful.",
+            safetyWarning: null,
+          },
+          {
+            order: 2,
+            title: "Soften the onion and garlic",
+            contentSimple:
+              "Heat some oil in a pan, add the onion, cook until soft, then add the garlic for a minute.",
+            contentStandard:
+              "Heat a tablespoon of oil in a pan over medium heat, add the onion, and cook for 5-7 minutes until soft and translucent, then add the garlic and cook for one more minute, stirring so it doesn't burn.",
+            contentDetailed:
+              "Heat a tablespoon of oil over medium heat, add the onion, and cook for 5-7 minutes, stirring occasionally, until soft and translucent but not browned. Add the garlic and cook for a further 30-60 seconds, stirring constantly — garlic burns quickly and turns bitter.",
+            safetyWarning: "Turn pan handles inward on the hob so you don't knock them and spill hot oil.",
+          },
+          {
+            order: 3,
+            title: "Add tomatoes and simmer",
+            contentSimple:
+              "Pour in the tin of tomatoes, add a pinch of salt and dried herbs, and let it bubble gently.",
+            contentStandard:
+              "Add the tinned tomatoes, a pinch of salt, and a teaspoon of dried herbs such as oregano or basil, then reduce the heat and let it simmer gently for 15-20 minutes, stirring occasionally.",
+            contentDetailed:
+              "Pour in the tinned tomatoes, season with a pinch of salt and a teaspoon of dried herbs (oregano and basil work well), and reduce heat to a gentle simmer. Let it cook uncovered for 15-20 minutes, stirring occasionally, so it thickens rather than staying watery.",
+            safetyWarning: "Simmering tomato sauce can spit — stand back a little when stirring or use a splash guard.",
+          },
+          {
+            order: 4,
+            title: "Taste, adjust, and combine with pasta",
+            contentSimple:
+              "Taste the sauce and add more salt or herbs if needed, then mix with cooked pasta.",
+            contentStandard:
+              "Taste the sauce and adjust seasoning with more salt, pepper, or herbs as needed, then combine with your drained, cooked pasta and a splash of the pasta cooking water if it needs loosening.",
+            contentDetailed:
+              "Taste the sauce and adjust with more salt, black pepper, or a pinch of sugar to balance acidity if needed. Combine with drained, cooked pasta, adding a splash of reserved pasta cooking water to loosen the sauce and help it cling to the pasta.",
+            safetyWarning: null,
+          },
+        ],
+      },
+    },
+  });
+
   console.log(
     `Seeded tutorials: ${tire.slug}, ${plug.slug}, ${lightSwitch.slug}, ${tapeMeasure.slug}, ${budget.slug}, ${button.slug}, ${sink.slug}, ${omelette.slug}`
   );
