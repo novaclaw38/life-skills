@@ -1,7 +1,6 @@
 "use client";
 
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
-import { useMemo } from "react";
 import { cn } from "@/lib/utils";
 import { TUTORIAL_CATEGORIES, type TutorialCategory } from "@/lib/tutorials/categories";
 
@@ -18,22 +17,6 @@ export function CategoryFilter({
 
   const currentCategory = selectedCategory ?? (searchParams.get("category") as TutorialCategory | "all") ?? "all";
   const currentAgeBand = selectedAgeBand ?? (searchParams.get("ageBand") as string | null) ?? "all";
-
-  const query = useMemo(() => {
-    const params = new URLSearchParams(searchParams.toString());
-    if (currentCategory && currentCategory !== "all") {
-      params.set("category", currentCategory);
-    } else {
-      params.delete("category");
-    }
-    if (currentAgeBand && currentAgeBand !== "all") {
-      params.set("ageBand", currentAgeBand);
-    } else {
-      params.delete("ageBand");
-    }
-    const qs = params.toString();
-    return qs ? `?${qs}` : "";
-  }, [searchParams, currentCategory, currentAgeBand]);
 
   function navigate(category: TutorialCategory | "all", ageBand: string) {
     const params = new URLSearchParams(searchParams.toString());

@@ -4,6 +4,7 @@ import { prisma } from "@/lib/prisma";
 import { searchTutorials } from "@/lib/tutorials/search";
 import { TutorialCard } from "@/components/TutorialCard";
 import { CategoryFilter } from "@/components/CategoryFilter";
+import type { TutorialCategory } from "@/lib/tutorials/categories";
 
 export default async function TutorialsPage({
   searchParams,
@@ -16,14 +17,14 @@ export default async function TutorialsPage({
 
   const params = await searchParams;
   const query = typeof params.q === "string" ? params.q : undefined;
-  const category = typeof params.category === "string" ? params.category : undefined;
-  const ageBand = typeof params.ageBand === "string" ? params.ageBand : undefined;
+  const category = typeof params.category === "string"
+    ? (params.category as TutorialCategory)
+    : undefined;
+  const ageBand = typeof params.ageBand === "string"
+    ? (params.ageBand as "AGE_8_11" | "AGE_12_15" | "AGE_16_18")
+    : undefined;
 
-  const tutorials = await searchTutorials({
-    query,
-    category: category as any,
-    ageBand: ageBand as any,
-  });
+  const tutorials = await searchTutorials({ query, category, ageBand });
 
   const progressRows = await prisma.userProgress.findMany({
     where: { userId: session.user.id },
@@ -67,7 +68,7 @@ export default async function TutorialsPage({
               Search
             </button>
           </form>
-          <CategoryFilter selectedCategory={category as any} selectedAgeBand={ageBand as any} />
+          <CategoryFilter selectedCategory={category} selectedAgeBand={ageBand} />
         </div>
 
         {tutorials.length === 0 ? (

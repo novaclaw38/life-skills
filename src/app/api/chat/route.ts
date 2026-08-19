@@ -36,7 +36,15 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "That tutorial step couldn't be found." }, { status: 404 });
     }
 
-    const timeoutMinutes = Number(process.env.AI_SESSION_TIMEOUT_MINUTES ?? "120");
+    const rawTimeout = process.env.AI_SESSION_TIMEOUT_MINUTES;
+    const timeoutMinutes =
+      typeof rawTimeout === "string" && Number.isFinite(+rawTimeout)
+        ? Math.max(1, Math.floor(+rawTimeout))
+        : 120;
+
+    if (step.tutorialId !== tutorial.id) {
+      return NextResponse.json({ error: "That step doesn't belong to that tutorial." }, { status: 400 });
+    }
 
     activeSession = startNew
       ? await startNewSession(session.user.id, tutorialId)

@@ -32,7 +32,7 @@ describe("searchTutorials", () => {
         safetyLevel: "low",
         steps: [{ id: "s1" }, { id: "s2" }],
       },
-    ] as any);
+    ] as unknown as Awaited<ReturnType<typeof mockFindMany>>);
 
     const results = await searchTutorials({});
 
@@ -102,7 +102,7 @@ describe("searchTutorials", () => {
         safetyLevel: "requires-adult-supervision",
         steps: [{ id: "s1" }],
       },
-    ] as any);
+    ] as unknown as Awaited<ReturnType<typeof mockFindMany>>);
 
     const results = await searchTutorials({ query: "wiring" });
 
