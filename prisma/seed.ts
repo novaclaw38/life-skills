@@ -540,6 +540,128 @@ async function main() {
     },
   });
 
+  const engineOil = await prisma.tutorial.upsert({
+    where: { slug: "checking-engine-oil" },
+    update: {},
+    create: {
+      slug: "checking-engine-oil",
+      title: "Checking and Topping Up Engine Oil",
+      summary: "Check your car's oil level with the dipstick and top it up safely if it's low.",
+      category: "Vehicle Maintenance",
+      safetyLevel: "low",
+      published: true,
+      steps: {
+        create: [
+          {
+            order: 1,
+            title: "Park on level ground",
+            contentSimple:
+              "Park somewhere flat and wait a few minutes after driving before you check the oil.",
+            contentStandard:
+              "Park on level ground and let the engine sit for a few minutes after driving so the oil settles back into the sump.",
+            contentDetailed:
+              "Park on level ground, switch off the engine, and wait 5-10 minutes so oil that's clinging to the engine's upper parts has time to drain back into the sump for an accurate reading.",
+            safetyWarning: "Let the engine cool a little first — engine parts can be hot enough to burn you.",
+          },
+          {
+            order: 2,
+            title: "Find and pull the dipstick",
+            contentSimple:
+              "Open the bonnet and find the dipstick — it usually has a brightly coloured handle.",
+            contentStandard:
+              "Open the bonnet, locate the dipstick (often yellow or orange handled), pull it fully out, and wipe it clean with a cloth.",
+            contentDetailed:
+              "Open the bonnet and locate the dipstick, typically marked with a bright handle and an oil-can symbol. Pull it out fully and wipe the blade clean with a lint-free cloth so your first reading isn't inflated by residue.",
+            safetyWarning: null,
+          },
+          {
+            order: 3,
+            title: "Read the level",
+            contentSimple:
+              "Push the dipstick back in fully, pull it out again, and check where the oil mark sits between the min and max lines.",
+            contentStandard:
+              "Reinsert the clean dipstick fully, remove it again, and read the oil film against the min/max markers on the blade.",
+            contentDetailed:
+              "Reinsert the wiped dipstick all the way, then withdraw it again and hold it horizontally to read where the oil film sits relative to the min and max marks. Below min means you need to top up.",
+            safetyWarning: null,
+          },
+          {
+            order: 4,
+            title: "Top up if needed",
+            contentSimple:
+              "If it's low, add a small amount of the right oil through the filler cap, then check again.",
+            contentStandard:
+              "If the level is below the minimum mark, remove the oil filler cap and add oil matching your car's manual in small amounts, rechecking the dipstick between pours.",
+            contentDetailed:
+              "If below minimum, unscrew the filler cap (separate from the dipstick) and add the oil grade specified in your owner's manual in small increments — around 250ml at a time — rechecking the dipstick after each pour to avoid overfilling.",
+            safetyWarning: "Never overfill — too much oil can damage the engine. Ask an adult if you're unsure which oil to use.",
+          },
+        ],
+      },
+    },
+  });
+
+  const jumpStart = await prisma.tutorial.upsert({
+    where: { slug: "jump-starting-a-car" },
+    update: {},
+    create: {
+      slug: "jump-starting-a-car",
+      title: "Jump-Starting a Car Battery",
+      summary: "Safely connect jump leads to start a car with a flat battery, with an adult present.",
+      category: "Vehicle Maintenance",
+      safetyLevel: "requires-adult-supervision",
+      published: true,
+      steps: {
+        create: [
+          {
+            order: 1,
+            title: "Position the cars",
+            contentSimple:
+              "Park the working car close to the flat one, nose to nose, but not touching, and switch both off.",
+            contentStandard:
+              "Park the donor car close enough for the jump leads to reach, ideally nose to nose, with both engines off and handbrakes on.",
+            contentDetailed:
+              "Position the donor vehicle within reach of your jump leads, engines off, handbrakes engaged, and both cars in park or neutral with gears disengaged before connecting anything.",
+            safetyWarning: "Always have an adult present for jump-starting — a wrong connection can cause sparks or damage.",
+          },
+          {
+            order: 2,
+            title: "Connect the positive leads",
+            contentSimple:
+              "Clip one red clamp to the flat battery's positive terminal, the other red clamp to the good battery's positive terminal.",
+            contentStandard:
+              "Attach the red (positive) clamp to the flat battery's positive terminal, then attach the other red clamp to the donor battery's positive terminal.",
+            contentDetailed:
+              "Connect the first red clamp to the positive (+) terminal of the flat battery, then connect the second red clamp to the positive (+) terminal of the donor battery. Positive terminals are usually marked with a plus sign and a red cover.",
+            safetyWarning: "Never let the red and black clamps touch each other while connected — this can cause a dangerous short.",
+          },
+          {
+            order: 3,
+            title: "Connect the negative lead safely",
+            contentSimple:
+              "Clip one black clamp to the good battery's negative terminal, and the other to bare metal on the flat car, away from the battery.",
+            contentStandard:
+              "Attach the black (negative) clamp to the donor battery's negative terminal, then attach the other black clamp to an unpainted metal point on the flat car's engine block, away from the battery and fuel system.",
+            contentDetailed:
+              "Connect the first black clamp to the negative (-) terminal of the donor battery. Connect the final black clamp to an unpainted metal earthing point on the flat car's engine — not the battery itself — to reduce the risk of sparks near battery gases.",
+            safetyWarning: "Never connect the final clamp directly to the flat battery's negative terminal — sparks near a battery can be dangerous.",
+          },
+          {
+            order: 4,
+            title: "Start the engines and remove leads",
+            contentSimple:
+              "Start the working car, wait a minute, then try starting the flat one. Remove the leads in reverse order once running.",
+            contentStandard:
+              "Start the donor car and let it run for a minute or two, then start the previously flat car. Once it's running, disconnect the leads in reverse order of how they were attached.",
+            contentDetailed:
+              "Start the donor vehicle and let it idle for one to two minutes to build charge, then attempt to start the flat vehicle. Once running, remove the clamps in reverse order — last-on, first-off — keeping clamps from touching each other or bodywork as you go.",
+            safetyWarning: "Let the newly-started car run or drive for at least 20-30 minutes to recharge the battery.",
+          },
+        ],
+      },
+    },
+  });
+
   console.log(
     `Seeded tutorials: ${tire.slug}, ${plug.slug}, ${lightSwitch.slug}, ${tapeMeasure.slug}, ${budget.slug}, ${button.slug}, ${sink.slug}, ${omelette.slug}`
   );
