@@ -784,6 +784,67 @@ async function main() {
     },
   });
 
+  const toilet = await prisma.tutorial.upsert({
+    where: { slug: "unblocking-a-toilet" },
+    update: {},
+    create: {
+      slug: "unblocking-a-toilet",
+      title: "Unblocking a Toilet",
+      summary: "Clear a blocked toilet with a plunger before it overflows.",
+      category: "Home Repairs",
+      safetyLevel: "low",
+      published: true,
+      steps: {
+        create: [
+          {
+            order: 1,
+            title: "Stop the water rising further",
+            contentSimple:
+              "If the bowl is very full, don't flush again — take off the cistern lid and hold the flap shut if water keeps running.",
+            contentStandard:
+              "If the bowl is nearly full, avoid flushing again. If water keeps trickling in, remove the cistern lid and hold the flush valve closed, or turn off the toilet's isolation valve if there is one.",
+            contentDetailed:
+              "If the bowl is close to overflowing, do not flush again. Remove the cistern lid to check whether water is still running in, and either hold the flush valve flap closed or shut the isolation valve (usually behind or beside the toilet) to stop more water entering.",
+            safetyWarning: null,
+          },
+          {
+            order: 2,
+            title: "Get the right plunger",
+            contentSimple:
+              "Use a flanged (funnel-shaped) plunger made for toilets, not a flat sink plunger.",
+            contentStandard:
+              "Use a flanged toilet plunger — it has an extra rubber flap that helps it seal inside the bowl's curved outlet, unlike a flat sink plunger.",
+            contentDetailed:
+              "A flanged plunger, with its extended rubber flap, seals far better against a toilet's curved outlet than a flat-cupped sink plunger. Using the wrong type wastes effort and can push water everywhere instead of down the pipe.",
+            safetyWarning: null,
+          },
+          {
+            order: 3,
+            title: "Plunge with a good seal",
+            contentSimple:
+              "Push the plunger fully over the hole so no air gaps remain, then pump firmly up and down.",
+            contentStandard:
+              "Position the plunger over the outlet so it forms a full seal with no air gaps, then push down gently first to expel air, then plunge firmly and rhythmically 10-15 times.",
+            contentDetailed:
+              "Angle the plunger into the bowl to fill it with the flange fully submerged, ensuring a complete seal with no trapped air. Push down gently on the first stroke to avoid splashing, then plunge firmly and rhythmically for 10-15 strokes, keeping the seal intact throughout.",
+            safetyWarning: "Wear gloves and wash your hands thoroughly afterwards.",
+          },
+          {
+            order: 4,
+            title: "Test and repeat if needed",
+            contentSimple:
+              "Pour a bucket of water in slowly to test if it drains. If not, plunge again or ask an adult for help.",
+            contentStandard:
+              "Slowly pour a bucket of water into the bowl to test drainage rather than flushing straight away. If it drains normally, the blockage has cleared; if not, repeat plunging or ask an adult about a toilet auger.",
+            contentDetailed:
+              "Test with a slowly poured bucket of water rather than a full flush, which risks overflow if the blockage remains. If drainage is still slow after two or three plunging attempts, stop and ask an adult about using a toilet auger or calling a plumber.",
+            safetyWarning: "If the bowl is still rising after two attempts, stop and get an adult rather than risking an overflow.",
+          },
+        ],
+      },
+    },
+  });
+
   console.log(
     `Seeded tutorials: ${tire.slug}, ${plug.slug}, ${lightSwitch.slug}, ${tapeMeasure.slug}, ${budget.slug}, ${button.slug}, ${sink.slug}, ${omelette.slug}`
   );
