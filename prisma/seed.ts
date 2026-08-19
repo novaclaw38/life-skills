@@ -731,7 +731,7 @@ async function main() {
       title: "Bleeding a Radiator",
       summary: "Release trapped air from a radiator that's cold at the top and warm at the bottom.",
       category: "Home Repairs",
-      safetyLevel: "low",
+      safetyLevel: "requires-adult-supervision",
       published: true,
       steps: {
         create: [
