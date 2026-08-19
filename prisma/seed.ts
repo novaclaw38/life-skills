@@ -662,6 +662,128 @@ async function main() {
     },
   });
 
+  const drywall = await prisma.tutorial.upsert({
+    where: { slug: "patching-a-hole-in-drywall" },
+    update: {},
+    create: {
+      slug: "patching-a-hole-in-drywall",
+      title: "Patching a Hole in Drywall",
+      summary: "Repair a small hole or dent in a plasterboard wall with filler and a scraper.",
+      category: "Home Repairs",
+      safetyLevel: "low",
+      published: true,
+      steps: {
+        create: [
+          {
+            order: 1,
+            title: "Clean up the hole",
+            contentSimple:
+              "Brush away loose bits of plasterboard and dust around the hole.",
+            contentStandard:
+              "Remove any loose or crumbling material around the hole with your fingers or a scraper, then brush away dust so filler will stick properly.",
+            contentDetailed:
+              "Clear away loose or crumbling plasterboard around the damaged area with a scraper, then dust off the surface with a dry brush or cloth. Filler adheres poorly to dusty or loose surfaces.",
+            safetyWarning: null,
+          },
+          {
+            order: 2,
+            title: "Apply filler",
+            contentSimple:
+              "Use a filler knife to press filler into the hole until it's slightly higher than the wall.",
+            contentStandard:
+              "Load a filling knife with ready-mixed filler and press it firmly into the hole, slightly overfilling since it shrinks a little as it dries.",
+            contentDetailed:
+              "Load a filling knife with ready-mixed or mixed powder filler, press it firmly into the hole to avoid trapped air, and build it up slightly proud of the surrounding wall to allow for shrinkage as it cures.",
+            safetyWarning: null,
+          },
+          {
+            order: 3,
+            title: "Let it dry and sand smooth",
+            contentSimple:
+              "Wait until the filler is fully dry and hard, then sand it flat with fine sandpaper.",
+            contentStandard:
+              "Allow the filler to dry fully per the packet instructions, then sand it flush with the wall using fine-grit sandpaper and a light touch.",
+            contentDetailed:
+              "Leave the filler to dry fully — usually a few hours, longer for deep holes — then sand it flush with fine-grit (around 180-220) sandpaper, checking with your hand for a smooth, even surface.",
+            safetyWarning: "Wear a dust mask when sanding filler — the dust can irritate your lungs.",
+          },
+          {
+            order: 4,
+            title: "Prime and paint",
+            contentSimple:
+              "Wipe away dust, then paint over the patch to match the wall.",
+            contentStandard:
+              "Wipe the patch clean of sanding dust, apply a thin coat of primer if the wall is a strong colour, then paint to match the surrounding wall.",
+            contentDetailed:
+              "Wipe down the patch and surrounding area to remove all sanding dust. Apply a primer coat if painting over a patch on a dark or strongly coloured wall, let it dry, then apply matching paint in thin, even coats.",
+            safetyWarning: null,
+          },
+        ],
+      },
+    },
+  });
+
+  const radiator = await prisma.tutorial.upsert({
+    where: { slug: "bleeding-a-radiator" },
+    update: {},
+    create: {
+      slug: "bleeding-a-radiator",
+      title: "Bleeding a Radiator",
+      summary: "Release trapped air from a radiator that's cold at the top and warm at the bottom.",
+      category: "Home Repairs",
+      safetyLevel: "low",
+      published: true,
+      steps: {
+        create: [
+          {
+            order: 1,
+            title: "Turn on the heating",
+            contentSimple:
+              "Turn the heating on and feel each radiator — cold at the top usually means trapped air.",
+            contentStandard:
+              "Switch the heating system on and check each radiator by hand — one that's cold at the top but warm lower down likely has trapped air.",
+            contentDetailed:
+              "Turn the central heating on and let radiators warm up, then check each one by hand. A radiator that's cool at the top but warm at the bottom is a classic sign of trapped air needing to be bled.",
+            safetyWarning: null,
+          },
+          {
+            order: 2,
+            title: "Turn off the heating and get ready",
+            contentSimple:
+              "Turn the heating off, then find the bleed key and a cloth or small container.",
+            contentStandard:
+              "Switch off the heating system so the radiator isn't actively heating, then get a radiator bleed key and a cloth or small container to catch drips.",
+            contentDetailed:
+              "Switch off the central heating so the pump isn't circulating hot water, and let the radiator cool slightly. Gather a radiator bleed key and a cloth or small container to catch any water that escapes.",
+            safetyWarning: "Let the radiator cool a bit first — the valve and escaping water can be hot.",
+          },
+          {
+            order: 3,
+            title: "Open the bleed valve",
+            contentSimple:
+              "Fit the key on the valve at the top corner and turn it slowly anticlockwise until you hear hissing.",
+            contentStandard:
+              "Fit the bleed key onto the valve at the top of the radiator and turn it slowly anticlockwise a quarter turn — you should hear air hissing out.",
+            contentDetailed:
+              "Fit the bleed key onto the square valve fitting at the top corner of the radiator, hold your cloth beneath it, and turn slowly anticlockwise about a quarter turn. You'll hear a hiss as trapped air escapes.",
+            safetyWarning: null,
+          },
+          {
+            order: 4,
+            title: "Close the valve and check pressure",
+            contentSimple:
+              "As soon as water dribbles out instead of air, close the valve, then check the boiler pressure gauge.",
+            contentStandard:
+              "Close the valve firmly as soon as a steady trickle of water appears (no more hissing), then check your boiler's pressure gauge and top up if it's dropped below the recommended range.",
+            contentDetailed:
+              "Once air stops hissing and water begins to dribble out steadily, close the valve firmly with the key. Afterwards, check the boiler's pressure gauge — bleeding radiators often drops system pressure, and it may need topping up via the filling loop.",
+            safetyWarning: "Ask an adult to help top up boiler pressure — overfilling can trigger a fault or leak.",
+          },
+        ],
+      },
+    },
+  });
+
   console.log(
     `Seeded tutorials: ${tire.slug}, ${plug.slug}, ${lightSwitch.slug}, ${tapeMeasure.slug}, ${budget.slug}, ${button.slug}, ${sink.slug}, ${omelette.slug}`
   );
