@@ -12,6 +12,15 @@ export async function markStepComplete(
   });
 }
 
+export async function removeStepProgress(
+  userId: string,
+  stepId: string
+): Promise<void> {
+  await prisma.userProgress.deleteMany({
+    where: { userId, stepId },
+  });
+}
+
 export async function getTutorialProgress(
   userId: string,
   tutorialId: string

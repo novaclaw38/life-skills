@@ -25,6 +25,17 @@ export default async function TutorialDetailPage({
     select: { stepId: true },
   });
 
+  const related = await prisma.tutorial.findMany({
+    where: {
+      published: true,
+      category: tutorial.category,
+      id: { not: tutorial.id },
+    },
+    orderBy: { updatedAt: "desc" },
+    take: 6,
+    select: { id: true, slug: true, title: true, summary: true, category: true, steps: { select: { id: true } } },
+  });
+
   return (
     <main className="mx-auto max-w-4xl p-6">
       <Link
@@ -42,6 +53,27 @@ export default async function TutorialDetailPage({
         ageBand={session.user.ageBand as "AGE_8_11" | "AGE_12_15" | "AGE_16_18"}
         completedStepIds={completedRows.map((r) => r.stepId)}
       />
+
+      <section className="mt-10">
+        <h2 className="mb-3 text-lg font-semibold text-card-foreground">Related tutorials</h2>
+        {related.length === 0 ? (
+          <p className="text-sm text-muted-foreground">No related tutorials yet.</p>
+        ) : (
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {related.map((item) => (
+              <Link
+                key={item.id}
+                href={`/tutorials/${item.slug}`}
+                className="flex flex-col gap-2 rounded-lg border bg-card p-4 transition-colors hover:border-primary"
+              >
+                <span className="text-xs font-medium uppercase tracking-wide text-primary">{item.category}</span>
+                <p className="font-medium text-card-foreground">{item.title}</p>
+                <p className="text-sm text-muted-foreground line-clamp-2">{item.summary}</p>
+              </Link>
+            ))}
+          </div>
+        )}
+      </section>
     </main>
   );
 }

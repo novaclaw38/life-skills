@@ -50,6 +50,20 @@ export function TutorialSteps({
     setCompleted((prev) => new Set(prev).add(stepId));
   }
 
+  async function toggleIncomplete(stepId: string) {
+    const res = await fetch("/api/progress", {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ tutorialId, stepId }),
+    });
+    if (!res.ok) return;
+    setCompleted((prev) => {
+      const next = new Set(prev);
+      next.delete(stepId);
+      return next;
+    });
+  }
+
   const activeStep = steps.find((s) => s.id === activeStepId) ?? steps[0];
   const percentComplete = steps.length
     ? Math.round((completed.size / steps.length) * 100)
@@ -125,6 +139,19 @@ export function TutorialSteps({
                   >
                     {isCompleted ? "Completed" : "Mark complete"}
                   </button>
+                  {isCompleted ? (
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        toggleIncomplete(step.id);
+                      }}
+                      onKeyDown={(e) => e.stopPropagation()}
+                      className="shrink-0 rounded-full px-2.5 py-1 text-xs font-medium text-muted-foreground underline underline-offset-4 hover:text-foreground"
+                    >
+                      Undo
+                    </button>
+                  ) : null}
                 </div>
 
                 <div
