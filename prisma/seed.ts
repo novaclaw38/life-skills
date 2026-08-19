@@ -1150,6 +1150,250 @@ async function main() {
     },
   });
 
+  const payslip = await prisma.tutorial.upsert({
+    where: { slug: "understanding-a-payslip" },
+    update: {},
+    create: {
+      slug: "understanding-a-payslip",
+      title: "Understanding a Payslip",
+      summary: "Read a payslip to check your pay, tax, and deductions are correct.",
+      category: "Money & Admin",
+      safetyLevel: "low",
+      published: true,
+      steps: {
+        create: [
+          {
+            order: 1,
+            title: "Find your gross pay",
+            contentSimple:
+              "Gross pay is your total earnings before anything is taken off.",
+            contentStandard:
+              "Locate the \"gross pay\" figure — this is your total earnings for the period before tax, National Insurance, or any other deductions are subtracted.",
+            contentDetailed:
+              "Gross pay is your headline figure: total earnings for the pay period before any deductions. It should match your agreed hourly rate or salary for the hours/period worked — check this first, since every other figure is calculated from it.",
+            safetyWarning: null,
+          },
+          {
+            order: 2,
+            title: "Check tax and National Insurance",
+            contentSimple:
+              "Look for Income Tax and National Insurance — these are taken off automatically to pay for public services.",
+            contentStandard:
+              "Find the Income Tax and National Insurance (NI) lines — these are statutory deductions taken automatically based on your tax code and earnings level.",
+            contentDetailed:
+              "Locate Income Tax and National Insurance deductions. Income Tax is calculated against your tax code (shown elsewhere on the payslip, usually starting with numbers like 1257L) and NI is based on earnings thresholds. If your tax code looks wrong or unfamiliar, that's worth asking about.",
+            safetyWarning: null,
+          },
+          {
+            order: 3,
+            title: "Check other deductions",
+            contentSimple:
+              "Look for anything else being taken off, like a pension or student loan repayment.",
+            contentStandard:
+              "Check for any other deductions such as workplace pension contributions, student loan repayments, or union fees, and confirm they match what you've agreed to.",
+            contentDetailed:
+              "Review any remaining deduction lines, such as a workplace pension contribution (often matched by your employer), student loan repayments, or other benefits-in-kind. Confirm the amounts and that you recognise every deduction listed.",
+            safetyWarning: null,
+          },
+          {
+            order: 4,
+            title: "Confirm net pay matches what you receive",
+            contentSimple:
+              "Net pay is what actually lands in your bank account — check it matches your bank statement.",
+            contentStandard:
+              "Find the \"net pay\" figure (gross pay minus all deductions) and confirm it matches what actually arrives in your bank account on payday.",
+            contentDetailed:
+              "Net pay is gross pay minus every deduction, and it should exactly match the amount that lands in your bank account. If it doesn't match, or a deduction looks unfamiliar or wrong, raise it with your employer's payroll or HR contact promptly — errors are easier to fix quickly.",
+            safetyWarning: null,
+          },
+        ],
+      },
+    },
+  });
+
+  const standingOrder = await prisma.tutorial.upsert({
+    where: { slug: "setting-up-a-standing-order" },
+    update: {},
+    create: {
+      slug: "setting-up-a-standing-order",
+      title: "Setting Up a Bank Standing Order",
+      summary: "Set up an automatic recurring payment from your bank account, like for rent or savings.",
+      category: "Money & Admin",
+      safetyLevel: "requires-adult-supervision",
+      published: true,
+      steps: {
+        create: [
+          {
+            order: 1,
+            title: "Gather the recipient's details",
+            contentSimple:
+              "Get the account name, sort code, and account number of whoever you're paying.",
+            contentStandard:
+              "Collect the payee's account name, 6-digit sort code, and 8-digit account number — get these directly from a trusted source, like a signed tenancy agreement, not just a text message.",
+            contentDetailed:
+              "Collect the exact account name, sort code, and account number of the payee. Verify these details from a trusted, official source (a signed agreement, an official letter, or a direct in-person confirmation) — payment detail scams often arrive by text or email pretending to be a landlord or company.",
+            safetyWarning: "Never change payment details based only on a text or email — always verify by phone or in person.",
+          },
+          {
+            order: 2,
+            title: "Open the standing order form in your banking app",
+            contentSimple:
+              "In your banking app or website, find \"Payments\" then \"Set up a standing order.\"",
+            contentStandard:
+              "In your banking app or online banking, navigate to the payments section and choose \"Set up a standing order\" (distinct from a one-off payment or a Direct Debit).",
+            contentDetailed:
+              "Open your bank's app or website and find the payments section, then choose the standing order option specifically — this differs from a one-off transfer (single payment) and a Direct Debit (amount set by the payee, not you).",
+            safetyWarning: null,
+          },
+          {
+            order: 3,
+            title: "Enter the amount and frequency",
+            contentSimple:
+              "Enter how much to pay, how often (like monthly), and the start date.",
+            contentStandard:
+              "Enter the payment amount, choose the frequency (weekly, monthly, etc.), and set the start date — for rent, this is usually the day before or on your payday.",
+            contentDetailed:
+              "Enter the exact amount, select the recurring frequency, and choose a start date. For recurring bills like rent, time the start date a day or two after your typical payday so funds are reliably available when the payment goes out.",
+            safetyWarning: null,
+          },
+          {
+            order: 4,
+            title: "Double-check and confirm",
+            contentSimple:
+              "Review all the details once more before confirming, then check it went through correctly.",
+            contentStandard:
+              "Review the payee details, amount, frequency, and start date one final time before confirming, then check your account a day or two after the first payment to confirm it processed correctly.",
+            contentDetailed:
+              "Before confirming, review every field once more — account details are the most common source of costly errors. After the first scheduled payment, check your account to confirm it processed for the correct amount to the correct recipient, and keep a note of the standing order for your own budget tracking.",
+            safetyWarning: "Set a reminder to review your standing orders every few months so you don't keep paying for something you've cancelled.",
+          },
+        ],
+      },
+    },
+  });
+
+  const ironing = await prisma.tutorial.upsert({
+    where: { slug: "ironing-a-shirt" },
+    update: {},
+    create: {
+      slug: "ironing-a-shirt",
+      title: "Ironing a Shirt",
+      summary: "Iron a shirt in the right order to get a crease-free finish without burning it.",
+      category: "Personal Care",
+      safetyLevel: "requires-adult-supervision",
+      published: true,
+      steps: {
+        create: [
+          {
+            order: 1,
+            title: "Check the care label and set the temperature",
+            contentSimple:
+              "Look at the label inside the collar for the fabric type, and set the iron to match it.",
+            contentStandard:
+              "Check the care label for fabric type and recommended heat setting, and set the iron accordingly — cotton and linen take more heat, synthetics need it much lower.",
+            contentDetailed:
+              "Check the care label inside the collar or side seam for the fabric composition and iron symbol. Set the iron's temperature dial to match: cotton and linen tolerate high heat, while polyester, silk, and blends need low-to-medium heat to avoid melting or scorching.",
+            safetyWarning: "Never leave a hot iron standing flat and unattended — always stand it upright.",
+          },
+          {
+            order: 2,
+            title: "Iron the collar and cuffs first",
+            contentSimple:
+              "Start with the collar, ironing from the points inward, then do the cuffs.",
+            contentStandard:
+              "Lay the collar flat and iron from the outer points toward the centre on both sides, then open and iron the cuffs flat, working around the buttons.",
+            contentDetailed:
+              "Start with the smaller, structured areas: lay the collar open and iron from each point toward the centre on the underside first, then the top side. Open the cuffs flat and iron around the buttons, doing both sides.",
+            safetyWarning: null,
+          },
+          {
+            order: 3,
+            title: "Iron the body, front to back",
+            contentSimple:
+              "Do the front panels with the buttons, then the back, then the sleeves last.",
+            contentStandard:
+              "Iron the front panels around the buttons, then lay the shirt back-up over the board and iron the yoke and back, then finish with the sleeves.",
+            contentDetailed:
+              "Iron the front panels, working around buttons and the plackets carefully. Lay the shirt with the back up over the ironing board, smoothing out the yoke and back panel. Finish with the sleeves, laying each flat with the seam aligned along one edge, ironing both sides.",
+            safetyWarning: "Keep your free hand away from the ironing area — the plate stays hot even after you lift it.",
+          },
+          {
+            order: 4,
+            title: "Hang immediately",
+            contentSimple:
+              "Put the shirt on a hanger straight away while it's still warm, so it keeps its shape.",
+            contentStandard:
+              "Hang the shirt on a hanger immediately after ironing, buttoning the top button, so it cools into shape rather than picking up new creases.",
+            contentDetailed:
+              "Hang the shirt on a shaped hanger right away, buttoning at least the top button and smoothing the shoulders. Ironing it right before it's needed, then leaving it crumpled, undoes the work — hanging while warm lets it set into shape.",
+            safetyWarning: "Switch the iron off and let it cool fully on its stand before putting it away.",
+          },
+        ],
+      },
+    },
+  });
+
+  const laundry = await prisma.tutorial.upsert({
+    where: { slug: "doing-a-load-of-laundry" },
+    update: {},
+    create: {
+      slug: "doing-a-load-of-laundry",
+      title: "Doing a Load of Laundry",
+      summary: "Sort, wash, and dry a load of laundry without shrinking or dyeing everything pink.",
+      category: "Personal Care",
+      safetyLevel: "low",
+      published: true,
+      steps: {
+        create: [
+          {
+            order: 1,
+            title: "Sort by colour and fabric",
+            contentSimple:
+              "Split clothes into lights, darks, and delicates so colours don't run onto each other.",
+            contentStandard:
+              "Sort clothes into separate piles: whites/lights, darks/colours, and delicates, since dyes from dark items can run onto lighter ones in the wash.",
+            contentDetailed:
+              "Sort into at least three groups: whites and light colours, darks and bright colours, and delicates (silk, wool, anything hand-wash only). New or unwashed dark items are the most likely to bleed dye, so wash them separately the first couple of times.",
+            safetyWarning: null,
+          },
+          {
+            order: 2,
+            title: "Check pockets and care labels",
+            contentSimple:
+              "Empty every pocket, and check labels for anything that shouldn't go in the machine.",
+            contentStandard:
+              "Empty all pockets of tissues, coins, and anything else, and check care labels for items that need a cooler wash, hand-washing only, or shouldn't be tumble dried.",
+            contentDetailed:
+              "Check every pocket for tissues (which shred and coat everything in lint), coins, and loose items that can damage the drum. Check care labels for temperature limits, hand-wash-only symbols, and drying restrictions before adding items to the machine load.",
+            safetyWarning: null,
+          },
+          {
+            order: 3,
+            title: "Choose the right settings and load the machine",
+            contentSimple:
+              "Pick a temperature that suits the fabrics, add the right amount of detergent, and don't overfill the drum.",
+            contentStandard:
+              "Choose a wash temperature matching the most delicate item in the load, measure detergent according to the load size and water hardness, and fill the drum no more than three-quarters full.",
+            contentDetailed:
+              "Select a wash temperature suited to the most delicate item in the load — when in doubt, wash cooler. Measure detergent per the manufacturer's guidance for load size and local water hardness (too much leaves residue, too little leaves clothes dirty). Load the drum loosely, no more than around three-quarters full, so clothes can move and rinse properly.",
+            safetyWarning: null,
+          },
+          {
+            order: 4,
+            title: "Dry appropriately",
+            contentSimple:
+              "Check the label before tumble drying — some things need to be hung up to dry instead.",
+            contentStandard:
+              "Check the care label before tumble drying — items marked with a crossed-out tumble dryer symbol should be air-dried on a rack or line instead, especially wool and anything that can shrink.",
+            contentDetailed:
+              "Check the care label's drying symbols before choosing a method. A crossed-out square-with-circle symbol means no tumble drying — air dry those items flat or on a hanger instead. Wool and some synthetics shrink or lose shape quickly in a hot dryer, so it's worth checking every time rather than assuming.",
+            safetyWarning: null,
+          },
+        ],
+      },
+    },
+  });
+
   console.log(
     `Seeded tutorials: ${tire.slug}, ${plug.slug}, ${lightSwitch.slug}, ${tapeMeasure.slug}, ${budget.slug}, ${button.slug}, ${sink.slug}, ${omelette.slug}`
   );
