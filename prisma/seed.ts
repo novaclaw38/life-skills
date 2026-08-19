@@ -1395,7 +1395,7 @@ async function main() {
   });
 
   console.log(
-    `Seeded tutorials: ${tire.slug}, ${plug.slug}, ${lightSwitch.slug}, ${tapeMeasure.slug}, ${budget.slug}, ${button.slug}, ${sink.slug}, ${omelette.slug}`
+    `Seeded tutorials: ${tire.slug}, ${plug.slug}, ${lightSwitch.slug}, ${tapeMeasure.slug}, ${budget.slug}, ${button.slug}, ${sink.slug}, ${omelette.slug}, ${engineOil.slug}, ${jumpStart.slug}, ${drywall.slug}, ${radiator.slug}, ${toilet.slug}, ${cordlessDrill.slug}, ${screwdrivers.slug}, ${rice.slug}, ${knifeSkills.slug}, ${pastaSauce.slug}, ${payslip.slug}, ${standingOrder.slug}, ${ironing.slug}, ${laundry.slug}`
   );
 }
 
