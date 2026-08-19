@@ -3,11 +3,12 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 vi.mock("@/lib/prisma");
 
 import { prisma } from "@/lib/prisma";
-import { markStepComplete, getTutorialProgress } from "@/lib/progress";
+import { markStepComplete, getTutorialProgress, removeStepProgress } from "@/lib/progress";
 
 const mockUpsert = vi.fn();
 const mockFindMany = vi.fn();
 const mockCount = vi.fn();
+const mockDeleteMany = vi.fn();
 
 describe("markStepComplete", () => {
   beforeEach(() => {
@@ -48,5 +49,23 @@ describe("getTutorialProgress", () => {
     const result = await getTutorialProgress("user-1", "tutorial-1");
 
     expect(result).toEqual({ completedStepIds: ["step-1", "step-2"], totalSteps: 6 });
+  });
+});
+
+describe("removeStepProgress", () => {
+  beforeEach(() => {
+    vi.mocked(prisma).userProgress = {
+      deleteMany: mockDeleteMany,
+    } as unknown as typeof prisma.userProgress;
+    mockDeleteMany.mockReset();
+  });
+
+  it("deletes progress rows for the given user and step", async () => {
+    mockDeleteMany.mockResolvedValue({ count: 1 });
+    await removeStepProgress("user-1", "step-1");
+
+    expect(mockDeleteMany).toHaveBeenCalledWith({
+      where: { userId: "user-1", stepId: "step-1" },
+    });
   });
 });
