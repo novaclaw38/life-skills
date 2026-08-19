@@ -845,6 +845,128 @@ async function main() {
     },
   });
 
+  const cordlessDrill = await prisma.tutorial.upsert({
+    where: { slug: "using-a-cordless-drill" },
+    update: {},
+    create: {
+      slug: "using-a-cordless-drill",
+      title: "Using a Cordless Drill Safely",
+      summary: "Set up, drill, and drive screws with a cordless drill without wrecking the job or your fingers.",
+      category: "Tool Use",
+      safetyLevel: "requires-adult-supervision",
+      published: true,
+      steps: {
+        create: [
+          {
+            order: 1,
+            title: "Choose the right bit and set the clutch",
+            contentSimple:
+              "Pick a drill bit or screwdriver bit that matches the job, and set the clutch to a low number for screws.",
+            contentStandard:
+              "Fit the correct drill or driver bit for the job and set the clutch dial to a low-to-medium number when driving screws so you don't strip them or the material.",
+            contentDetailed:
+              "Select the drill or driver bit matched to the task — a twist bit for drilling, a Phillips/Pozi bit for screws. Set the clutch dial low for driving screws into soft material and higher only for pure drilling, which disengages the clutch entirely on most drills.",
+            safetyWarning: null,
+          },
+          {
+            order: 2,
+            title: "Secure the workpiece",
+            contentSimple:
+              "Clamp down what you're drilling into so it can't spin or slide.",
+            contentStandard:
+              "Clamp the workpiece to a bench or hold it firmly against a stable surface — never hold small pieces only in your hand while drilling.",
+            contentDetailed:
+              "Secure the workpiece with a clamp or vice wherever possible. Small or loose pieces can spin violently if a bit binds, so never rely on holding them by hand alone, especially with anything metal.",
+            safetyWarning: "Never drill into material you're holding only in your hand — it can spin and cut you.",
+          },
+          {
+            order: 3,
+            title: "Drill or drive with steady pressure",
+            contentSimple:
+              "Hold the drill straight, start slow, and apply steady, gentle pressure.",
+            contentStandard:
+              "Keep the drill perpendicular to the surface, start at a low speed to create a starting point, then apply steady, even pressure without forcing it.",
+            contentDetailed:
+              "Hold the drill perpendicular to the work surface, start at low speed to establish the hole or screw start without the bit wandering, then increase to a comfortable speed with steady, even pressure. Let the tool do the work rather than forcing it.",
+            safetyWarning: "Wear safety glasses — drilling throws off small chips and dust.",
+          },
+          {
+            order: 4,
+            title: "Finish and store safely",
+            contentSimple:
+              "Release the trigger before pulling the bit out, then put the drill away with the safety lock on.",
+            contentStandard:
+              "Let the drill fully stop before withdrawing the bit from the hole, then engage any safety lock and store the drill and battery separately from young children.",
+            contentDetailed:
+              "Release the trigger and allow the chuck to fully stop before withdrawing the bit — pulling out a spinning bit can snag material or your hand. Engage the forward/reverse safety lock, and store the drill and its battery in a safe, dry place.",
+            safetyWarning: "Always have an adult nearby the first several times you use a power drill.",
+          },
+        ],
+      },
+    },
+  });
+
+  const screwdrivers = await prisma.tutorial.upsert({
+    where: { slug: "choosing-the-right-screwdriver" },
+    update: {},
+    create: {
+      slug: "choosing-the-right-screwdriver",
+      title: "Choosing and Using the Right Screwdriver",
+      summary: "Match screwdriver type and size to the screw so you don't strip it, and drive screws cleanly.",
+      category: "Tool Use",
+      safetyLevel: "low",
+      published: true,
+      steps: {
+        create: [
+          {
+            order: 1,
+            title: "Identify the screw head type",
+            contentSimple:
+              "Look at the screw head: a single slot is flathead, a cross shape is Phillips or Pozi.",
+            contentStandard:
+              "Check the screw head shape: a single straight slot needs a flathead driver; a cross-shaped slot needs a Phillips or Pozidriv driver — look closely, as they look similar but aren't interchangeable.",
+            contentDetailed:
+              "Identify the drive type: flathead (single slot), Phillips (cross with tapered flanks, can cam out), or Pozidriv (cross with extra small ribs between the arms, common in the UK). Using the wrong cross-head type damages both the screw and the driver.",
+            safetyWarning: null,
+          },
+          {
+            order: 2,
+            title: "Match the size",
+            contentSimple:
+              "Pick a driver tip that fills the screw head snugly, not loose and not too big to fit.",
+            contentStandard:
+              "Choose a driver size that fits the screw head snugly with no visible gap or wobble — too small or too large both lead to stripped screws.",
+            contentDetailed:
+              "Test-fit the driver in the screw head before applying force: it should sit snugly with no wobble and no gap around the edges. A too-small tip will slip and round out the screw slot; a too-large tip won't seat fully.",
+            safetyWarning: null,
+          },
+          {
+            order: 3,
+            title: "Apply straight, steady pressure",
+            contentSimple:
+              "Push straight down into the screw while you turn, so the driver doesn't slip out.",
+            contentStandard:
+              "Keep the driver aligned straight with the screw axis and apply firm downward pressure as you turn, so the tip stays seated instead of camming out.",
+            contentDetailed:
+              "Hold the driver perfectly in line with the screw's axis and apply consistent downward pressure throughout the turn. Angling the driver even slightly increases the chance it slips out (\"cams out\"), rounding the screw head.",
+            safetyWarning: "Keep your other hand clear of the screwdriver's path in case it slips.",
+          },
+          {
+            order: 4,
+            title: "Deal with a stubborn or stripped screw",
+            contentSimple:
+              "If it won't turn, try a rubber band between the tip and screw for extra grip, or ask for help.",
+            contentStandard:
+              "If a screw won't budge or the head is starting to round out, try placing a wide rubber band between the driver tip and the screw for extra grip, or use a properly sized driver and firmer, straight pressure. Ask an adult if it's still stuck.",
+            contentDetailed:
+              "For a stubborn screw, a rubber band placed between the driver tip and screw head can add grip and reduce slipping. If the head is already rounding, stop forcing it and ask an adult — a screw extractor or different technique may be needed to avoid making it worse.",
+            safetyWarning: null,
+          },
+        ],
+      },
+    },
+  });
+
   console.log(
     `Seeded tutorials: ${tire.slug}, ${plug.slug}, ${lightSwitch.slug}, ${tapeMeasure.slug}, ${budget.slug}, ${button.slug}, ${sink.slug}, ${omelette.slug}`
   );
