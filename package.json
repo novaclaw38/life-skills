@@ -13,7 +13,8 @@
     "test:e2e": "playwright test",
     "db:migrate": "prisma migrate dev",
     "db:seed": "tsx prisma/seed.ts",
-    "db:generate-images": "tsx scripts/generate-tutorial-images.ts"
+    "db:generate-images": "tsx scripts/generate-tutorial-images.ts",
+    "db:backfill-images": "tsx scripts/backfill-missing-images.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.117.1",
