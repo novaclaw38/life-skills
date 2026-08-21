@@ -27,6 +27,8 @@ const RACK: Array<{
   category: string;
   title: string;
   image?: { src: string; alt: string };
+  steps: number;
+  needsAdult: boolean;
 }> = [
   {
     href: "/tutorials/checking-engine-oil",
@@ -37,6 +39,8 @@ const RACK: Array<{
       src: "/landing/checking-engine-oil.jpg",
       alt: "Person checking a car's engine oil level with a dipstick, hood open",
     },
+    steps: 4,
+    needsAdult: true,
   },
   {
     href: "/tutorials/unblocking-a-toilet",
@@ -47,6 +51,8 @@ const RACK: Array<{
       src: "/tutorials/cmt07liqq0029l6euazy1y9d7/cmt07liqq002al6euqi8vrle5.png",
       alt: "Toilet plunger beside a toilet",
     },
+    steps: 4,
+    needsAdult: true,
   },
   {
     href: "/tutorials/using-a-cordless-drill",
@@ -57,6 +63,8 @@ const RACK: Array<{
       src: "/tutorials/cmt07lggu001zl6euntdtl3oy/cmt07lggu0020l6eufkjfl39h.png",
       alt: "Cordless drill driving a screw into wood",
     },
+    steps: 4,
+    needsAdult: true,
   },
   {
     href: "/tutorials/cooking-rice-perfectly",
@@ -67,6 +75,8 @@ const RACK: Array<{
       src: "/tutorials/cmt07lo5p002yl6eubpanquy1/cmt07lo5q002zl6euc4qt5w2c.png",
       alt: "Bowl of rice with a spoon",
     },
+    steps: 4,
+    needsAdult: true,
   },
   {
     href: "/tutorials/making-a-budget-spreadsheet",
@@ -77,6 +87,8 @@ const RACK: Array<{
       src: "/landing/making-a-budget-spreadsheet.jpg",
       alt: "Person at a laptop filling in a monthly budget spreadsheet, with a calculator and coffee mug nearby",
     },
+    steps: 5,
+    needsAdult: false,
   },
   {
     href: "/tutorials/ironing-a-shirt",
@@ -87,6 +99,8 @@ const RACK: Array<{
       src: "/tutorials/cmt07lfd0001ul6euedwcusk9/cmt07lfd0001vl6euxh3hu2hm.png",
       alt: "Ironing a shirt on an ironing board",
     },
+    steps: 4,
+    needsAdult: true,
   },
 ];
 
@@ -180,15 +194,17 @@ export default function Home() {
                 See all 22 →
               </Link>
             </Reveal>
-            <div className="-mx-6 flex gap-4 overflow-x-auto px-6 pb-2 sm:mx-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:overflow-visible sm:px-0 lg:grid-cols-6">
+            <div className="-mx-6 flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-2 sm:mx-0 sm:grid sm:grid-cols-3 sm:snap-none sm:gap-4 sm:overflow-visible sm:px-0 lg:grid-cols-6">
               {RACK.map((item, i) => (
-                <Reveal key={item.href} delay={i * 60} className="w-40 shrink-0 sm:w-auto">
+                <Reveal key={item.href} delay={i * 60} className="w-40 shrink-0 snap-start sm:w-auto">
                   <SeedPacketCard
                     href={item.href}
                     color={item.color}
                     category={item.category}
                     title={item.title}
                     image={item.image}
+                    steps={item.steps}
+                    needsAdult={item.needsAdult}
                   />
                 </Reveal>
               ))}

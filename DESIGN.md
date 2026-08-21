@@ -190,6 +190,7 @@ Printed-label radius scale — 4px on buttons/inputs, 6px on cards, 8px on panel
 - **Structure:** A colored category band (top, not side — the floor bans colored side borders) with a small-caps label, then a photo (or, absent one, a subtle diagonal kraft-hatch placeholder — never a repeated text label), then the title.
 - **Shape:** 6px radius, 1px kraft border, `shadow-soft` at rest.
 - **Hover:** Border shifts to tomato signal; card lifts 1px with `shadow-float`.
+- **Flip reveal (delight moment):** On hover or keyboard focus, the photo crossfades to the packet's "back" — the same kraft-hatch texture as the no-photo placeholder, showing the real step count (tabular mono) and, when the tutorial has one, a safety-check tag reusing the shield-check icon from the mentor section's trust line; otherwise a plain "No safety flags." Never gates the click-through (the front card is fully informative and clickable on its own); absent on touch-only input as a progressive enhancement, and respects `prefers-reduced-motion` (instant swap, no transition).
 
 ### The Opened Lead Packet (`HeroDemo` — signature component)
 The hero's one signature moment: a card shown "opened" to its instructional back — a colored category band, a real tutorial illustration, and the mentor chat (learner's message in tomato, mentor's reply in muted kraft) — with a rotated sliver of the packet's own front peeking from behind it. This is the clearest expression of the whole system's thesis: front to pick it up, back to actually use it.
