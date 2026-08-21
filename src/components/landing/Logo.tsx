@@ -11,7 +11,7 @@ export function Logo({ className }: { className?: string }) {
           strokeLinejoin="round"
         />
       </svg>
-      <span className="text-[15px] font-semibold tracking-tight text-foreground">Skill Up</span>
+      <span className="text-[15px] font-semibold tracking-tight text-foreground">Skill&nbsp;Up</span>
     </span>
   );
 }

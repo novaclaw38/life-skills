@@ -52,14 +52,14 @@ export default function Home() {
   return (
     <div className="flex flex-1 flex-col">
       {/* Nav */}
-      <header className="sticky top-0 z-20 border-b border-border bg-background/90 backdrop-blur-sm">
+      <header className="sticky top-0 z-[var(--z-sticky)] border-b border-border bg-background/90 backdrop-blur-sm">
         <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-4">
           <Logo />
           <nav className="hidden items-center gap-6 text-sm text-muted-foreground sm:flex">
-            <Link href="/tutorials" className="hover:text-foreground">
+            <Link href="/tutorials" className="rounded-sm transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
               Tutorials
             </Link>
-            <a href="#how-it-works" className="hover:text-foreground">
+            <a href="#how-it-works" className="rounded-sm transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
               How it works
             </a>
           </nav>
@@ -70,7 +70,7 @@ export default function Home() {
               </Button>
             </Link>
             <Link href="/signup">
-              <Button size="sm">Get started</Button>
+              <Button size="sm">Start learning</Button>
             </Link>
           </div>
         </div>
@@ -88,7 +88,7 @@ export default function Home() {
               </Reveal>
               <Reveal delay={90}>
                 <p className="max-w-sm text-base leading-relaxed text-muted-foreground">
-                  Changing a tire, wiring a plug, and more — with a mentor tuned to your age.
+                  Changing a tire, wiring a plug, and more, guided by a mentor tuned to your age.
                 </p>
               </Reveal>
               <Reveal delay={180} className="flex flex-col gap-3 sm:flex-row">
@@ -105,7 +105,7 @@ export default function Home() {
               </Reveal>
               <Reveal delay={260}>
                 <p className="text-xs text-muted-foreground">
-                  22 tutorials across 6 categories — free to start.
+                  22 tutorials across 6 categories. Free to start.
                 </p>
               </Reveal>
             </div>
@@ -145,7 +145,7 @@ export default function Home() {
               </h2>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
                 The same step, written three different ways. An 8-year-old and a 17-year-old need
-                different words — every tutorial gets both.
+                different words. Every tutorial gets both.
               </p>
             </Reveal>
             <div className="flex flex-col gap-3 lg:col-span-3">
@@ -201,7 +201,7 @@ export default function Home() {
               Skills for actual life
             </h2>
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-              From jump-starting a car to sewing a button back on — the things you&rsquo;ll actually
+              From jump-starting a car to sewing a button back on: the things you&rsquo;ll actually
               need, not textbook filler.
             </p>
           </Reveal>
@@ -241,7 +241,7 @@ export default function Home() {
               />
               {STEPS.map((step, i) => (
                 <Reveal key={step.n} delay={i * 110} className="relative flex flex-col items-center text-center">
-                  <span className="relative z-10 flex h-12 w-12 items-center justify-center rounded-full border-2 border-primary bg-background text-base font-semibold text-primary">
+                  <span className="relative z-[var(--z-raised)] flex h-12 w-12 items-center justify-center rounded-full border-2 border-primary bg-background text-base font-semibold text-primary">
                     {step.n}
                   </span>
                   <h3 className="mt-4 text-sm font-medium text-foreground">{step.title}</h3>
@@ -259,7 +259,7 @@ export default function Home() {
               Ready to learn something real?
             </h2>
             <p className="text-sm text-muted-foreground">
-              Start your first tutorial free — no credit card, just a mentor who&rsquo;s ready when you
+              Start your first tutorial free. No credit card, just a mentor who&rsquo;s ready when you
               are.
             </p>
             <Link href="/signup">
@@ -274,18 +274,18 @@ export default function Home() {
         <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-6 sm:flex-row sm:items-center sm:justify-between">
           <Logo />
           <nav className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted-foreground">
-            <Link href="/tutorials" className="hover:text-foreground">
+            <Link href="/tutorials" className="rounded-sm transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
               Tutorials
             </Link>
-            <Link href="/signin" className="hover:text-foreground">
+            <Link href="/signin" className="rounded-sm transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
               Sign in
             </Link>
-            <Link href="/signup" className="hover:text-foreground">
-              Get started
+            <Link href="/signup" className="rounded-sm transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
+              Start learning
             </Link>
           </nav>
           <p className="text-xs text-muted-foreground">
-            &copy; {new Date().getFullYear()} Skill Up.
+            &copy; {new Date().getFullYear()} Skill&nbsp;Up.
           </p>
         </div>
       </footer>

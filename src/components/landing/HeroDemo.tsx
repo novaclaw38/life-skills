@@ -11,7 +11,7 @@ export function HeroDemo() {
             <span className="rounded-full bg-primary/10 px-2.5 py-1 text-[11px] font-medium text-primary">
               Vehicle Maintenance
             </span>
-            <span className="text-xs text-muted-foreground">Step 3 of 6</span>
+            <span className="text-xs tabular-nums text-muted-foreground">Step 3 of 6</span>
           </div>
 
           <div className="relative aspect-[16/10] w-full bg-white">
@@ -49,7 +49,7 @@ export function HeroDemo() {
       <Reveal
         variant="pop"
         delay={520}
-        className="absolute -left-4 -top-5 sm:-left-8 z-10 hidden sm:block"
+        className="absolute -left-4 -top-5 z-[var(--z-raised)] hidden sm:-left-8 sm:block"
       >
         <div className="flex items-center gap-2 rounded-xl border border-border bg-background px-3 py-2 shadow-float">
           <span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary text-primary-foreground">

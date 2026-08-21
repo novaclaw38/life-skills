@@ -33,7 +33,7 @@ export function ProgressRing({ percent }: { percent: number }) {
           transform={`rotate(-90 ${center} ${center})`}
         />
       </svg>
-      <span className="absolute inset-0 flex items-center justify-center text-[10px] font-medium text-foreground">
+      <span className="absolute inset-0 flex items-center justify-center text-[10px] font-medium tabular-nums text-foreground">
         {clamped}%
       </span>
     </span>
