@@ -37,7 +37,16 @@ export function HeroDemo() {
             </div>
 
             <div className="flex items-start gap-2 rounded-lg bg-muted px-3 py-2">
-              <span className="text-sm">🔧</span>
+              <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+                <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                  <path
+                    d="M2.5 3.5c0-.55.45-1 1-1h9c.55 0 1 .45 1 1v6c0 .55-.45 1-1 1H6.2L3.5 13v-2.5h-0c-.55 0-1-.45-1-1v-6Z"
+                    stroke="currentColor"
+                    strokeWidth="1.3"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </span>
               <p className="text-xs leading-relaxed text-foreground">
                 Nice work — red to the dead battery first. Ready for the next cable?
               </p>
