@@ -1,10 +1,9 @@
-import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { Logo } from "@/components/landing/Logo";
 import { HeroDemo } from "@/components/landing/HeroDemo";
 import { Reveal } from "@/components/landing/Reveal";
-import { TUTORIAL_CATEGORIES } from "@/lib/tutorials/categories";
+import { SeedPacketCard } from "@/components/landing/SeedPacketCard";
 
 const AGE_VARIANTS = [
   {
@@ -21,53 +20,98 @@ const AGE_VARIANTS = [
   },
 ];
 
-const MOSAIC = [
-  { src: "/tutorials/cmt07lggu001zl6euntdtl3oy/cmt07lggu0020l6eufkjfl39h.png", alt: "Cordless drill driving a screw into wood", big: true },
-  { src: "/tutorials/cmt07l8en000yl6eur7kwhvfl/cmt07l8eo000zl6eu7l0uobjg.png", alt: "Hands washing at a sink", big: false },
-  { src: "/tutorials/cmt07liqq0029l6euazy1y9d7/cmt07liqq002al6euqi8vrle5.png", alt: "Toilet plunger beside a toilet", big: false },
-  { src: "/tutorials/cmt07lo5p002yl6eubpanquy1/cmt07lo5q002zl6euc4qt5w2c.png", alt: "Bowl of rice with a spoon", big: false },
-  { src: "/tutorials/cmt07l3zg000dl6euhfvgy714/cmt07l3zg000el6euhd00w9mi.png", alt: "Light switch on a wall", big: true },
-  { src: "/tutorials/cmt07lfd0001ul6euedwcusk9/cmt07lfd0001vl6euxh3hu2hm.png", alt: "Ironing a shirt on an ironing board", big: false },
-];
-
-const STEPS = [
+const RACK: Array<{
+  href: string;
+  color: "vehicle" | "home" | "tools" | "kitchen" | "money" | "personal";
+  category: string;
+  title: string;
+  image?: { src: string; alt: string };
+}> = [
   {
-    n: "1",
-    title: "Pick a skill",
-    body: "Browse 22 tutorials across six categories, from car care to the kitchen.",
+    href: "/tutorials/checking-engine-oil",
+    color: "vehicle",
+    category: "Vehicle Maintenance",
+    title: "Checking engine oil",
   },
   {
-    n: "2",
-    title: "Follow along",
-    body: "Every step is written three ways, matched to your age band automatically.",
+    href: "/tutorials/unblocking-a-toilet",
+    color: "home",
+    category: "Home Repairs",
+    title: "Unblocking a toilet",
+    image: {
+      src: "/tutorials/cmt07liqq0029l6euazy1y9d7/cmt07liqq002al6euqi8vrle5.png",
+      alt: "Toilet plunger beside a toilet",
+    },
   },
   {
-    n: "3",
-    title: "Ask if you're stuck",
-    body: "Your AI mentor answers questions about the exact step you're on.",
+    href: "/tutorials/using-a-cordless-drill",
+    color: "tools",
+    category: "Tool Use",
+    title: "Using a cordless drill",
+    image: {
+      src: "/tutorials/cmt07lggu001zl6euntdtl3oy/cmt07lggu0020l6eufkjfl39h.png",
+      alt: "Cordless drill driving a screw into wood",
+    },
+  },
+  {
+    href: "/tutorials/cooking-rice-perfectly",
+    color: "kitchen",
+    category: "Kitchen Skills",
+    title: "Cooking rice perfectly",
+    image: {
+      src: "/tutorials/cmt07lo5p002yl6eubpanquy1/cmt07lo5q002zl6euc4qt5w2c.png",
+      alt: "Bowl of rice with a spoon",
+    },
+  },
+  {
+    href: "/tutorials/making-a-budget-spreadsheet",
+    color: "money",
+    category: "Money & Admin",
+    title: "Making a budget spreadsheet",
+    image: {
+      src: "/landing/making-a-budget-spreadsheet.jpg",
+      alt: "Person at a laptop filling in a monthly budget spreadsheet, with a calculator and coffee mug nearby",
+    },
+  },
+  {
+    href: "/tutorials/ironing-a-shirt",
+    color: "personal",
+    category: "Personal Care",
+    title: "Ironing a shirt",
+    image: {
+      src: "/tutorials/cmt07lfd0001ul6euedwcusk9/cmt07lfd0001vl6euxh3hu2hm.png",
+      alt: "Ironing a shirt on an ironing board",
+    },
   },
 ];
 
 export default function Home() {
   return (
     <div className="flex flex-1 flex-col">
-      {/* Nav */}
-      <header className="sticky top-0 z-[var(--z-sticky)] border-b border-border bg-background/90 backdrop-blur-sm">
-        <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-4">
-          <Logo />
-          <nav className="hidden items-center gap-6 text-sm text-muted-foreground sm:flex">
-            <Link href="/tutorials" className="rounded-sm transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
+      {/* Header — galvanized steel structural bar */}
+      <header className="sticky top-0 z-[var(--z-sticky)] bg-surface-structural">
+        <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-3.5">
+          <Logo onDark />
+          <nav className="hidden items-center gap-6 text-sm text-steel-300 sm:flex">
+            <Link
+              href="/tutorials"
+              className="rounded-sm transition-colors hover:text-surface-structural-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+            >
               Tutorials
             </Link>
-            <a href="#how-it-works" className="rounded-sm transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
+            <a
+              href="#how-it-works"
+              className="rounded-sm transition-colors hover:text-surface-structural-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+            >
               How it works
             </a>
           </nav>
           <div className="flex items-center gap-2">
-            <Link href="/signin">
-              <Button variant="ghost" size="sm">
-                Sign in
-              </Button>
+            <Link
+              href="/signin"
+              className="rounded-sm px-3 py-1.5 text-sm font-medium text-steel-300 transition-colors hover:text-surface-structural-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+            >
+              Sign in
             </Link>
             <Link href="/signup">
               <Button size="sm">Start learning</Button>
@@ -77,12 +121,12 @@ export default function Home() {
       </header>
 
       <main className="flex flex-1 flex-col">
-        {/* Hero — product-dominant */}
-        <section className="mx-auto w-full max-w-6xl px-6 pb-16 pt-14 sm:pt-24">
+        {/* Hero — the rack's lead packet, opened */}
+        <section className="mx-auto w-full max-w-6xl px-6 pb-16 pt-14 sm:pt-20">
           <div className="flex flex-col items-center gap-10 lg:flex-row lg:items-center lg:gap-8">
             <div className="flex flex-1 flex-col items-center gap-5 text-center lg:items-start lg:text-left">
               <Reveal>
-                <h1 className="max-w-sm text-4xl font-semibold leading-[1.1] tracking-tight text-foreground sm:max-w-md sm:text-[2.75rem]">
+                <h1 className="max-w-md font-display text-4xl font-bold leading-[1.1] tracking-tight text-foreground sm:text-5xl">
                   Real skills, taught step by step.
                 </h1>
               </Reveal>
@@ -104,8 +148,8 @@ export default function Home() {
                 </Link>
               </Reveal>
               <Reveal delay={260}>
-                <p className="text-xs text-muted-foreground">
-                  22 tutorials across 6 categories. Free to start.
+                <p className="font-mono text-xs tabular-nums text-muted-foreground">
+                  22 tutorials · 6 categories · free to start
                 </p>
               </Reveal>
             </div>
@@ -116,31 +160,41 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Proof strip */}
-        <section className="border-y border-border bg-card py-8">
-          <Reveal className="mx-auto flex w-full max-w-6xl flex-col items-center gap-4 px-6 text-center sm:flex-row sm:justify-between sm:text-left">
-            <p className="text-sm text-muted-foreground">
-              <span className="font-medium text-foreground">22 step-by-step tutorials</span> across
-              six categories, each written for three age bands.
-            </p>
-            <div className="flex flex-wrap justify-center gap-2">
-              {TUTORIAL_CATEGORIES.map((category) => (
-                <span
-                  key={category}
-                  className="rounded-full border border-border px-3 py-1 text-xs text-muted-foreground"
-                >
-                  {category}
-                </span>
+        {/* The Rack — browse by category */}
+        <section className="border-y border-border-structural/20 bg-muted py-14 sm:py-16">
+          <div className="mx-auto w-full max-w-6xl px-6">
+            <Reveal className="mb-6 flex items-end justify-between gap-4">
+              <h2 className="font-display text-xl font-bold tracking-tight text-foreground sm:text-2xl">
+                Pick one off the rack
+              </h2>
+              <Link
+                href="/tutorials"
+                className="hidden shrink-0 rounded-sm text-sm font-medium text-primary transition-colors hover:text-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 sm:block"
+              >
+                See all 22 →
+              </Link>
+            </Reveal>
+            <div className="-mx-6 flex gap-4 overflow-x-auto px-6 pb-2 sm:mx-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:overflow-visible sm:px-0 lg:grid-cols-6">
+              {RACK.map((item, i) => (
+                <Reveal key={item.href} delay={i * 60} className="w-40 shrink-0 sm:w-auto">
+                  <SeedPacketCard
+                    href={item.href}
+                    color={item.color}
+                    category={item.category}
+                    title={item.title}
+                    image={item.image}
+                  />
+                </Reveal>
               ))}
             </div>
-          </Reveal>
+          </div>
         </section>
 
-        {/* Feature row 1 — age-adapted content compare */}
+        {/* Feature row 1 — age-adapted content, almanac table */}
         <section className="mx-auto w-full max-w-6xl px-6 py-20 sm:py-28">
           <div className="grid gap-10 lg:grid-cols-5 lg:items-center lg:gap-14">
             <Reveal className="lg:col-span-2">
-              <h2 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
+              <h2 className="font-display text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
                 Tutorials that grow up with you
               </h2>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
@@ -148,12 +202,16 @@ export default function Home() {
                 different words. Every tutorial gets both.
               </p>
             </Reveal>
-            <div className="flex flex-col gap-3 lg:col-span-3">
+            <div className="overflow-hidden rounded-md border border-border bg-card lg:col-span-3">
               {AGE_VARIANTS.map((variant, i) => (
                 <Reveal key={variant.band} delay={i * 90}>
-                  <div className="flex items-start gap-3 rounded-lg border border-border bg-card p-4">
-                    <span className="mt-0.5 shrink-0 rounded-full bg-primary/10 px-2 py-0.5 text-[11px] font-medium text-primary">
-                      Age {variant.band}
+                  <div
+                    className={`flex items-start gap-4 p-4 ${
+                      i !== 0 ? "border-t border-border" : ""
+                    }`}
+                  >
+                    <span className="mt-0.5 shrink-0 font-mono text-xs tabular-nums text-primary">
+                      AGE {variant.band}
                     </span>
                     <p className="text-sm leading-relaxed text-card-foreground">{variant.text}</p>
                   </div>
@@ -163,19 +221,22 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Feature row 2 — mentor */}
-        <section className="border-y border-border bg-card py-20 sm:py-28">
+        {/* Feature row 2 — mentor, another packet back */}
+        <section className="border-y border-border-structural/20 bg-muted py-20 sm:py-28">
           <div className="mx-auto grid w-full max-w-6xl gap-10 px-6 lg:grid-cols-2 lg:items-center lg:gap-14">
             <Reveal className="order-2 lg:order-1">
-              <div className="flex flex-col gap-2 rounded-lg border border-border bg-background p-4 shadow-soft">
-                <p className="text-xs font-medium text-muted-foreground">
-                  Wiring a Plug — Connect the wires to the right terminals
-                </p>
-                <div className="flex flex-col gap-2 pt-1">
-                  <p className="max-w-[85%] self-end rounded-lg bg-primary px-3 py-2 text-sm text-primary-foreground">
+              <div className="overflow-hidden rounded-md border border-border bg-card shadow-soft">
+                <div className="flex items-center justify-between bg-packet-home px-4 py-2.5 text-white">
+                  <span className="text-[11px] font-bold uppercase tracking-label">
+                    Wiring a Plug
+                  </span>
+                  <span className="font-mono text-xs tabular-nums">Step 4 / 5</span>
+                </div>
+                <div className="flex flex-col gap-2 p-4">
+                  <p className="max-w-[85%] self-end rounded-md bg-primary px-3 py-2 text-sm text-primary-foreground">
                     Which wire goes where again?
                   </p>
-                  <p className="max-w-[85%] self-start rounded-lg bg-muted px-3 py-2 text-sm text-foreground">
+                  <p className="max-w-[85%] self-start rounded-md bg-muted px-3 py-2 text-sm text-foreground">
                     Brown to live (L), blue to neutral (N), and green-and-yellow to earth. Want a
                     tip for remembering the order?
                   </p>
@@ -183,7 +244,7 @@ export default function Home() {
               </div>
             </Reveal>
             <Reveal delay={100} className="order-1 lg:order-2">
-              <h2 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
+              <h2 className="font-display text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
                 A mentor that actually helps
               </h2>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
@@ -194,68 +255,54 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Feature row 3 — mosaic */}
-        <section className="mx-auto w-full max-w-6xl px-6 py-20 sm:py-28">
-          <Reveal className="mb-8 max-w-lg">
-            <h2 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
-              Skills for actual life
+        {/* How it works — instruction-sheet steps */}
+        <section id="how-it-works" className="mx-auto w-full max-w-4xl px-6 py-20 sm:py-28">
+          <Reveal className="mb-10">
+            <h2 className="font-display text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
+              How it works
             </h2>
-            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-              From jump-starting a car to sewing a button back on: the things you&rsquo;ll actually
-              need, not textbook filler.
-            </p>
           </Reveal>
-          <div className="grid grid-cols-3 grid-rows-2 gap-3 sm:gap-4">
-            {MOSAIC.map((tile, i) => (
-              <Reveal
-                key={tile.src}
-                delay={i * 60}
-                className={tile.big ? "col-span-2 row-span-1" : "col-span-1 row-span-1"}
-              >
-                <div className="relative aspect-square overflow-hidden rounded-lg border border-border bg-white">
-                  <Image
-                    src={tile.src}
-                    alt={tile.alt}
-                    fill
-                    sizes="(min-width: 640px) 33vw, 45vw"
-                    className="object-cover scale-150 transition-transform duration-300 hover:scale-[1.65]"
-                  />
+          <div className="overflow-hidden rounded-md border border-border bg-card">
+            {[
+              {
+                n: "1",
+                title: "Pick a skill",
+                body: "Browse 22 tutorials across six categories, from car care to the kitchen.",
+              },
+              {
+                n: "2",
+                title: "Follow along",
+                body: "Every step is written three ways, matched to your age band automatically.",
+              },
+              {
+                n: "3",
+                title: "Ask if you're stuck",
+                body: "Your AI mentor answers questions about the exact step you're on.",
+              },
+            ].map((step, i) => (
+              <Reveal key={step.n} delay={i * 110}>
+                <div
+                  className={`flex items-start gap-4 p-5 ${i !== 0 ? "border-t border-border" : ""}`}
+                >
+                  <span className="font-mono text-lg font-bold tabular-nums text-primary">
+                    {step.n}
+                  </span>
+                  <div>
+                    <h3 className="font-display text-sm font-bold text-foreground">
+                      {step.title}
+                    </h3>
+                    <p className="mt-1 text-sm text-muted-foreground">{step.body}</p>
+                  </div>
                 </div>
               </Reveal>
             ))}
           </div>
         </section>
 
-        {/* How it works */}
-        <section id="how-it-works" className="border-y border-border bg-card py-20 sm:py-28">
-          <div className="mx-auto w-full max-w-4xl px-6">
-            <Reveal className="mb-12 text-center">
-              <h2 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
-                How it works
-              </h2>
-            </Reveal>
-            <div className="relative grid gap-10 sm:grid-cols-3 sm:gap-6">
-              <div
-                aria-hidden="true"
-                className="absolute left-0 right-0 top-6 hidden border-t border-dashed border-border sm:block"
-              />
-              {STEPS.map((step, i) => (
-                <Reveal key={step.n} delay={i * 110} className="relative flex flex-col items-center text-center">
-                  <span className="relative z-[var(--z-raised)] flex h-12 w-12 items-center justify-center rounded-full border-2 border-primary bg-background text-base font-semibold text-primary">
-                    {step.n}
-                  </span>
-                  <h3 className="mt-4 text-sm font-medium text-foreground">{step.title}</h3>
-                  <p className="mt-1.5 text-sm text-muted-foreground">{step.body}</p>
-                </Reveal>
-              ))}
-            </div>
-          </div>
-        </section>
-
         {/* Final CTA */}
-        <section className="bg-primary/5 py-20 sm:py-28">
+        <section className="border-t border-border bg-card py-20 sm:py-28">
           <Reveal className="mx-auto flex w-full max-w-2xl flex-col items-center gap-5 px-6 text-center">
-            <h2 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
+            <h2 className="font-display text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
               Ready to learn something real?
             </h2>
             <p className="text-sm text-muted-foreground">
@@ -270,21 +317,30 @@ export default function Home() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-border py-10">
+      <footer className="bg-surface-structural py-10">
         <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-6 sm:flex-row sm:items-center sm:justify-between">
-          <Logo />
-          <nav className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted-foreground">
-            <Link href="/tutorials" className="rounded-sm transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
+          <Logo onDark />
+          <nav className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-steel-300">
+            <Link
+              href="/tutorials"
+              className="rounded-sm transition-colors hover:text-surface-structural-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+            >
               Tutorials
             </Link>
-            <Link href="/signin" className="rounded-sm transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
+            <Link
+              href="/signin"
+              className="rounded-sm transition-colors hover:text-surface-structural-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+            >
               Sign in
             </Link>
-            <Link href="/signup" className="rounded-sm transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
+            <Link
+              href="/signup"
+              className="rounded-sm transition-colors hover:text-surface-structural-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+            >
               Start learning
             </Link>
           </nav>
-          <p className="text-xs text-muted-foreground">
+          <p className="font-mono text-xs text-steel-300">
             &copy; {new Date().getFullYear()} Skill&nbsp;Up.
           </p>
         </div>

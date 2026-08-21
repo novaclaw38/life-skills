@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-21T05:40:43Z",
+  "title": "Design System: Skill Up",
+  "extensions": {
+    "colorMeta": {
+      "tomato-signal": {
+        "role": "primary",
+        "displayName": "Tomato Signal",
+        "canonical": "#c1392b",
+        "tonalRamp": ["#3a0f0a", "#5c1810", "#7e2116", "#a02c1c", "#c1392b", "#d9604f", "#eb9184", "#f7d3cd"]
+      },
+      "kraft-50": {
+        "role": "neutral",
+        "displayName": "Kraft 50 (page background)",
+        "canonical": "#f6f1e4",
+        "tonalRamp": ["#0d0b08", "#16130f", "#241f1a", "#4a4237", "#6b6152", "#8c8171", "#d0bf98", "#f6f1e4"]
+      },
+      "steel-700": {
+        "role": "structural",
+        "displayName": "Steel 700 (header/footer)",
+        "canonical": "#3a424a",
+        "tonalRamp": ["#14171a", "#1e2226", "#2b3138", "#3a424a", "#5c6772", "#aab2ba", "#c9cfd4", "#e8ebed"]
+      },
+      "packet-vehicle": { "role": "category", "displayName": "Vehicle Maintenance", "canonical": "#4d6a78" },
+      "packet-home": { "role": "category", "displayName": "Home Repairs", "canonical": "#c1622b" },
+      "packet-tools": { "role": "category", "displayName": "Tool Use", "canonical": "#c9971b" },
+      "packet-kitchen": { "role": "category", "displayName": "Kitchen Skills", "canonical": "#5b7a3a" },
+      "packet-money": { "role": "category", "displayName": "Money & Admin", "canonical": "#2f6b63" },
+      "packet-personal": { "role": "category", "displayName": "Personal Care", "canonical": "#7a4a6b" }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Hero headline and section headings only." },
+      "body": { "displayName": "Body", "purpose": "Reading text, tutorial content, chat messages. Chosen for accessibility across an 8-18 audience." },
+      "label": { "displayName": "Packet Band Label", "purpose": "Small-caps category label on packet-front bands." },
+      "mono": { "displayName": "Mono", "purpose": "Step counters, AGE labels, footer copyright — tabular data only." }
+    },
+    "shadows": [
+      { "name": "shadow-soft", "value": "0 1px 2px rgba(36,31,26,.06), 0 8px 20px -12px rgba(36,31,26,.18)", "purpose": "Default paper-lift for every packet card and panel." },
+      { "name": "shadow-float", "value": "0 3px 6px rgba(36,31,26,.1), 0 20px 44px -18px rgba(193,57,43,.32)", "purpose": "Reserved for the hero's one opened lead packet; glow tracks the tomato signal." }
+    ],
+    "motion": [
+      { "name": "ease-out", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Entrance reveals and the lead packet's flip-open moment." },
+      { "name": "flip-in", "value": "keyframes: rotateY(-8deg)->0, opacity 0->1, 400ms", "purpose": "Signature entrance for the opened lead packet in HeroDemo." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The one 'act here' control — tomato signal fill.",
+      "html": "<button class=\"ds-btn ds-btn-primary\">Start learning</button>",
+      "css": ".ds-btn { display: inline-flex; align-items: center; justify-content: center; height: 2.75rem; padding: 0 1rem; border-radius: 0.25rem; font-weight: 500; font-size: 0.875rem; border: none; cursor: pointer; transition: background-color .15s cubic-bezier(.16,1,.3,1); } .ds-btn-primary { background: #c1392b; color: #fdfbf6; } .ds-btn-primary:hover { background: #a52f22; } .ds-btn-primary:focus-visible { outline: none; box-shadow: 0 0 0 2px #fdfbf6, 0 0 0 4px #c1392b; }"
+    },
+    {
+      "name": "Seed Packet Card",
+      "kind": "card",
+      "refersTo": "packet-card",
+      "description": "Category packet front: colored band, photo or hatch placeholder, title.",
+      "html": "<a href=\"#\" class=\"ds-packet\"><div class=\"ds-packet-band\">Kitchen Skills</div><div class=\"ds-packet-photo\"></div><div class=\"ds-packet-title\">Cooking rice perfectly</div></a>",
+      "css": ".ds-packet { display: flex; flex-direction: column; border-radius: 0.375rem; border: 1px solid #e3d6b8; background: #fdfbf6; overflow: hidden; text-decoration: none; box-shadow: 0 1px 2px rgba(36,31,26,.06), 0 8px 20px -12px rgba(36,31,26,.18); transition: border-color .2s cubic-bezier(.16,1,.3,1), transform .2s cubic-bezier(.16,1,.3,1); } .ds-packet:hover { border-color: #c1392b; transform: translateY(-2px); } .ds-packet-band { padding: 0.5rem 0.75rem; font-size: 0.6875rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; background: #5b7a3a; color: #fff; } .ds-packet-photo { aspect-ratio: 4/3; background: #f3f4f5; } .ds-packet-title { padding: 0.75rem; font-weight: 700; color: #241f1a; }"
+    },
+    {
+      "name": "Opened Lead Packet (Mentor Chat)",
+      "kind": "custom",
+      "refersTo": null,
+      "description": "The signature hero moment: a packet flipped open to its instructional back, showing the mentor chat, with the front peeking behind it.",
+      "html": "<div class=\"ds-lead\"><div class=\"ds-lead-band\"><span>Jump-Starting a Car</span><span class=\"ds-lead-step\">Step 3 / 6</span></div><div class=\"ds-lead-body\"><p class=\"ds-bubble ds-bubble-user\">Which cable goes on first?</p><p class=\"ds-bubble ds-bubble-mentor\">Red to the dead battery's positive terminal first.</p></div></div>",
+      "css": ".ds-lead { border-radius: 0.5rem; border: 1px solid #e3d6b8; background: #fdfbf6; overflow: hidden; box-shadow: 0 3px 6px rgba(36,31,26,.1), 0 20px 44px -18px rgba(193,57,43,.32); } .ds-lead-band { display: flex; justify-content: space-between; padding: 0.625rem 1rem; background: #4d6a78; color: #fff; font-size: 0.6875rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; } .ds-lead-step { font-family: 'JetBrains Mono', monospace; font-variant-numeric: tabular-nums; text-transform: none; letter-spacing: 0; } .ds-lead-body { padding: 1rem; display: flex; flex-direction: column; gap: 0.5rem; } .ds-bubble { max-width: 85%; border-radius: 0.375rem; padding: 0.5rem 0.75rem; font-size: 0.875rem; margin: 0; } .ds-bubble-user { align-self: flex-end; background: #c1392b; color: #fdfbf6; } .ds-bubble-mentor { align-self: flex-start; background: #efe7d3; color: #241f1a; }"
+    },
+    {
+      "name": "Almanac Row",
+      "kind": "custom",
+      "refersTo": null,
+      "description": "Instruction-sheet style row used for age-variant comparisons and numbered how-it-works steps.",
+      "html": "<div class=\"ds-almanac\"><span class=\"ds-almanac-label\">AGE 8-11</span><p class=\"ds-almanac-text\">Turn the lug nuts a little bit to the left with the wrench.</p></div>",
+      "css": ".ds-almanac { display: flex; gap: 1rem; align-items: flex-start; padding: 1rem; border-top: 1px solid #e3d6b8; } .ds-almanac-label { font-family: 'JetBrains Mono', monospace; font-variant-numeric: tabular-nums; font-size: 0.75rem; color: #c1392b; flex-shrink: 0; } .ds-almanac-text { font-size: 0.875rem; color: #241f1a; margin: 0; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Seed Rack",
+    "overview": "Skill Up looks like a hardware-store seed-packet rack, not a SaaS dashboard: a warm kraft-buff paper ground, printed-label typography, and exactly one loud color — tomato red — reserved for the single thing worth acting on right now. Tutorials are packets: an enticing front (a real illustration, a colored category band) you'd pick off the rack, and an instructional back — the mentor chat, the actual steps — you'd flip to and follow. Category color (pea-green, sunflower-gold, rust, teal, berry, steel-blue) lives only on packet-front art; it never appears on a button, a link, or a focus ring. That discipline is what keeps six competing hues from reading as noise: the eye always knows tomato red means \"act here.\"\n\nDepth stays material rather than decorative: a soft paper-lift shadow at rest, stepping up to a tomato-tinted spotlight shadow on the one focal card per view (the opened lead packet in the hero). Corners are tight and printed-label small (4/6/8px) rather than soft app-bubble rounded, and the galvanized-steel header/footer bars are the one cool, structural note against an otherwise warm, paper-toned page — the rack's frame, not its content.",
+    "keyCharacteristics": [
+      "One signal color (tomato red) for every interactive/active element; category colors are decorative classification only, confined to packet-front art",
+      "Kraft-buff paper ground + warm charcoal ink + galvanized-steel structural chrome (header, footer)",
+      "Printed-label radius language: 4px controls, 6px cards, 8px panels — never soft app-bubble rounding",
+      "Tutorials render as two-sided packets: photographed/illustrated front, instructional back (steps, mentor chat)"
+    ],
+    "rules": [
+      { "name": "The One Signal Rule", "body": "Tomato red is the only color that means \"act here.\" It never appears as a category color, a background wash, or a decorative accent — its rarity is what makes it legible as the one thing to do.", "section": "colors" },
+      { "name": "The Packet-Front Rule", "body": "The six category colors exist only on packet-front art (the colored band + its card). No button, link, focus ring, or piece of UI chrome may borrow a category color.", "section": "colors" },
+      { "name": "The Tracked Glow Rule", "body": "shadow-float's tinted layer always matches the active mode's tomato signal, so the one focal card's glow stays legibly on-brand in both themes.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do keep tomato red as the only interactive/action color; every other hue is packet-front classification only.",
+      "Do put category color on a card's top band, never a side border.",
+      "Do use the printed-label radius scale (4/6/8px) — never soft app-bubble rounding.",
+      "Do tint shadow-float's glow to the active mode's tomato signal."
+    ],
+    "donts": [
+      "Don't let a category color leak into a button, link, or focus ring.",
+      "Don't fabricate a photo-style illustration for a category with no real asset — use the honest kraft-hatch placeholder instead.",
+      "Don't reuse the light-mode ambient shadow verbatim in dark mode — use the inset light-edge treatment."
+    ]
+  }
+}

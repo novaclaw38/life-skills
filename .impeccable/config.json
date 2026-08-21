@@ -1,0 +1,21 @@
+{
+  "buildPath": "code",
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "design-system-font-size",
+        "value": "11px",
+        "createdAt": "2026-08-21T05:18:35.042Z",
+        "reason": "Intentional small-caps packet-band label size, part of the in-progress Seed Rack redesign; DESIGN.md's type ramp will be rewritten from the finished build per new-work.md"
+      },
+      {
+        "rule": "design-system-font-size",
+        "value": "10px",
+        "createdAt": "2026-08-21T05:19:16.468Z",
+        "reason": "Micro-badge label size (pre-existing pattern in HeroDemo), left as-is; final type ramp captured in DESIGN.md rewrite at finish"
+      }
+    ]
+  }
+}
