@@ -66,7 +66,7 @@ export default async function TutorialDetailPage({
                 href={`/tutorials/${item.slug}`}
                 className="flex flex-col gap-2 rounded-lg border bg-card p-4 transition-colors hover:border-primary"
               >
-                <span className="text-xs font-medium uppercase tracking-wide text-primary">{item.category}</span>
+                <span className="text-xs font-medium uppercase tracking-wide text-muted-foreground">{item.category}</span>
                 <p className="font-medium text-card-foreground">{item.title}</p>
                 <p className="text-sm text-muted-foreground line-clamp-2">{item.summary}</p>
               </Link>

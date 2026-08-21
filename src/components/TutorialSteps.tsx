@@ -133,7 +133,7 @@ export function TutorialSteps({
                     className={cn(
                       "shrink-0 rounded-full px-2.5 py-1 text-xs font-medium",
                       isCompleted
-                        ? "bg-green-100 text-green-800"
+                        ? "bg-primary/10 text-primary"
                         : "border border-border text-muted-foreground hover:bg-muted"
                     )}
                   >
@@ -161,8 +161,24 @@ export function TutorialSteps({
                   )}
                 >
                   {step.safetyWarning && (
-                    <p className="flex items-start gap-2 rounded-md border-l-4 border-amber-500 bg-amber-50 p-3 text-sm font-medium text-amber-900">
-                      <span aria-hidden="true">⚠</span>
+                    <p className="flex items-start gap-2 rounded-md border border-hazard-amber bg-hazard-amber/10 p-3 text-sm font-medium text-hazard-ink">
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 16 16"
+                        fill="none"
+                        aria-hidden="true"
+                        className="mt-0.5 shrink-0"
+                      >
+                        <path
+                          d="M8 1.5 1 14h14L8 1.5Z"
+                          stroke="currentColor"
+                          strokeWidth="1.3"
+                          strokeLinejoin="round"
+                        />
+                        <path d="M8 6.25v3.25" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
+                        <circle cx="8" cy="11.75" r="0.9" fill="currentColor" />
+                      </svg>
                       <span>{step.safetyWarning}</span>
                     </p>
                   )}

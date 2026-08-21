@@ -4,6 +4,7 @@ import { Logo } from "@/components/landing/Logo";
 import { HeroDemo } from "@/components/landing/HeroDemo";
 import { Reveal } from "@/components/landing/Reveal";
 import { SeedPacketCard } from "@/components/landing/SeedPacketCard";
+import { MobileNav } from "@/components/landing/MobileNav";
 
 const AGE_VARIANTS = [
   {
@@ -32,6 +33,10 @@ const RACK: Array<{
     color: "vehicle",
     category: "Vehicle Maintenance",
     title: "Checking engine oil",
+    image: {
+      src: "/landing/checking-engine-oil.jpg",
+      alt: "Person checking a car's engine oil level with a dipstick, hood open",
+    },
   },
   {
     href: "/tutorials/unblocking-a-toilet",
@@ -116,6 +121,7 @@ export default function Home() {
             <Link href="/signup">
               <Button size="sm">Start learning</Button>
             </Link>
+            <MobileNav />
           </div>
         </div>
       </header>
@@ -250,6 +256,28 @@ export default function Home() {
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
                 Stuck on a step? Ask right there. The AI mentor knows exactly which tutorial and
                 step you&rsquo;re on, and answers in language built for your age band.
+              </p>
+              <p className="mt-4 flex items-start gap-2 text-sm text-foreground">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  aria-hidden="true"
+                  className="mt-0.5 shrink-0 text-primary"
+                >
+                  <path
+                    d="M8 1.5 2 3.75v3.5c0 4 2.5 6.25 6 7.25 3.5-1 6-3.25 6-7.25v-3.5L8 1.5Z"
+                    stroke="currentColor"
+                    strokeWidth="1.3"
+                    strokeLinejoin="round"
+                  />
+                  <path d="M5.5 8.25 7.25 10 10.5 6.25" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+                <span>
+                  Hands-on tasks flag exactly when to grab an adult — wiring a plug and 17 other
+                  tutorials carry a built-in safety check.
+                </span>
               </p>
             </Reveal>
           </div>

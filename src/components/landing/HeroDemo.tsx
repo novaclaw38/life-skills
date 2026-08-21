@@ -5,10 +5,11 @@ import { Reveal } from "@/components/landing/Reveal";
 export function HeroDemo() {
   return (
     <div className="relative w-full max-w-md sm:max-w-lg">
-      {/* The packet front, peeking out from behind the opened instructional back */}
+      {/* The packet front, peeking out from behind the opened instructional back —
+          offset generously so the band label reads clearly, not an ambiguous sliver */}
       <div
         aria-hidden="true"
-        className="absolute -right-3 top-6 hidden h-40 w-28 -rotate-6 overflow-hidden rounded-md border border-border bg-card shadow-soft sm:block"
+        className="absolute -right-20 top-10 hidden h-44 w-36 -rotate-3 overflow-hidden rounded-md border border-border bg-card shadow-soft sm:block"
       >
         <div className="flex h-8 items-center bg-packet-vehicle px-2 text-[10px] font-bold uppercase tracking-label text-white">
           Vehicle
@@ -18,7 +19,7 @@ export function HeroDemo() {
             src="/tutorials/cmt07lbvw001fl6eu95e0hnra/cmt07lbvw001gl6eu1b89iw86.png"
             alt=""
             fill
-            sizes="112px"
+            sizes="144px"
             className="object-cover"
           />
         </div>

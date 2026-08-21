@@ -112,7 +112,7 @@ export function ChatPanel({
         ))}
       </div>
       {error && (
-        <div className="flex items-center justify-between rounded-md bg-red-50 p-2 text-xs text-red-700">
+        <div className="flex items-center justify-between rounded-md border border-primary/30 bg-primary/10 p-2 text-xs text-primary">
           <span>{error}</span>
           <button
             type="button"

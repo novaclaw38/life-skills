@@ -80,7 +80,7 @@ export default function AgeBandOnboardingPage() {
             </div>
           </div>
           {error && (
-            <p id={errorId} role="alert" className="text-sm text-red-600">
+            <p id={errorId} role="alert" className="text-sm text-primary">
               {error}
             </p>
           )}

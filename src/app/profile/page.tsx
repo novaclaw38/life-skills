@@ -74,7 +74,7 @@ export default async function ProfilePage() {
                     className="flex flex-col gap-2 rounded-lg border bg-card p-4 transition-colors hover:border-primary"
                   >
                     <div className="flex items-center justify-between">
-                      <span className="text-xs font-medium uppercase tracking-wide text-primary">{tutorial.category}</span>
+                      <span className="text-xs font-medium uppercase tracking-wide text-muted-foreground">{tutorial.category}</span>
                       <span className="text-xs text-muted-foreground">{percent}%</span>
                     </div>
                     <p className="font-medium text-card-foreground">{tutorial.title}</p>
@@ -102,7 +102,7 @@ export default async function ProfilePage() {
                   href={`/tutorials/${tutorial.slug}`}
                   className="flex flex-col gap-2 rounded-lg border bg-card p-4 transition-colors hover:border-primary"
                 >
-                  <span className="text-xs font-medium uppercase tracking-wide text-primary">{tutorial.category}</span>
+                  <span className="text-xs font-medium uppercase tracking-wide text-muted-foreground">{tutorial.category}</span>
                   <p className="font-medium text-card-foreground">{tutorial.title}</p>
                   <p className="text-sm text-muted-foreground line-clamp-2">{tutorial.summary}</p>
                   <span className="text-xs text-muted-foreground">Finished</span>
